@@ -1,5 +1,5 @@
 package com.program.demo.repositories;
-import com.program.demo.model.Bikes;
+import com.program.demo.model.Motobikes;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface BikesRepository extends JpaRepository<Bikes, Integer> {
+public interface BikesRepository extends JpaRepository<Motobikes, Integer> {
 
-  Optional<Bikes> findById(Integer bike_id);
-  List<Bikes> findAll();
+  Optional<Motobikes> findById(Integer bike_id);
+  List<Motobikes> findAll();
 }

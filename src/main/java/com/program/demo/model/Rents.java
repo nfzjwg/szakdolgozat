@@ -48,8 +48,8 @@ public class Rents {
     private Cars car;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "bike_id")
-    private Bikes bike;
+    @JoinColumn(name = "motobike_id")
+    private Motobikes motobike;
   
    
     }

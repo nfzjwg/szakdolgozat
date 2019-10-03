@@ -24,8 +24,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
-@Table(name = "bikes")
-public class Bikes {
+@Table(name = "motobikes")
+public class Motobikes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +44,7 @@ public class Bikes {
     @Column(name = "rented")
     private Boolean rendted ;
     
-    @OneToMany(mappedBy = "bike", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "motobike", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Rents> rent;
     }

@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import com.program.demo.model.User;
 import com.program.demo.repositories.UserRepository;
+import com.program.demo.security.AuthenticatedUser;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.annotation.Secured;
@@ -13,12 +15,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * Controller class for the AppUser entity.
+ * Controller class for the User entity.
  */
 @RequestMapping("/users")
 @CrossOrigin
@@ -29,7 +33,7 @@ public class UserController {
 
  // @Autowired private BCryptPasswordEncoder passwordEncoder;
 
-  //@Autowired private AuthenticatedUser authenticatedUser;
+  @Autowired private AuthenticatedUser authenticatedUser;
 
   @GetMapping("")
   //@Secured({"ROLE_AUTHOR", "ROLE_GUEST"})
@@ -51,6 +55,22 @@ public class UserController {
     }
     return ResponseEntity.notFound().build();
   }
+  @PostMapping("/register")
+  public ResponseEntity<User> register(@RequestBody User user) {
+    Optional<User> optionalAppUser = userRepository.findByUsername(user.getUsername());
+    if (optionalAppUser.isPresent()) {
+      return ResponseEntity.badRequest().build();
+    }
+    user.setPassword(user.getPassword());
+    return ResponseEntity.ok(userRepository.save(user));
+  }
+
+  @PostMapping("login")
+  public ResponseEntity login() {
+    return ResponseEntity.ok(authenticatedUser.getUser());
+  }
+
+/*
   @DeleteMapping("/{id}")
   public ResponseEntity deleteComment(@PathVariable Integer id) {
     Optional<User> optionalComment = userRepository.findById(id);
@@ -58,9 +78,10 @@ public class UserController {
       userRepository.delete(optionalComment.get());
       return ResponseEntity.ok().build();
     }
+    
     return ResponseEntity.notFound().build();
   }
-
+*/
 
   
 }

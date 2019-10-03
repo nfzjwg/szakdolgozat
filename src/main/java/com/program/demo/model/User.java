@@ -3,25 +3,28 @@ package com.program.demo.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import java.util.List;
-//import org.springframework.security.core.GrantedAuthority;
 
 
 @Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-@Entity
+
 @Table(name = "users")
 public class User {
 
@@ -38,12 +41,11 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
-  /*  @Column(name = "role", nullable = false)
+    @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
-  */
-    @Column(name = "gender")
-    private Gender gender;
+  
+    
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Rents> rent;
@@ -51,36 +53,48 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Messages> message;
-  
-   /* public enum Role implements GrantedAuthority {
+
+    public  int getId(){
+      return this.id;
+    }
+    public  String getUsername(){
+      return this.username;
+    }
+    public  String getPassword(){
+      return this.password;
+    }
+    public  String getEmail(){
+      return this.email;
+    }
+    public Role getRole(){
+      return this.role;
+    }
+
+    public void setPassword(String pw){
+      this.password= pw;
+    }
+    public void setUsername(String name){
+      this.username= name;
+    }
+    public void setEmail(String email){
+      this.email= email;
+    }
+    public void setUser(User other){
+      this.username = other.username;
+      this.password = other.password;
+      this.email = other.email;
+      this.id = other.id;
+      this.role= other.role;
+      }
+      public enum Role implements GrantedAuthority {
         ROLE_GUEST,
-        ROLE_AUTHOR;
-    
+        ROLE_COMPANY,
+        ROLE_ADMIN;
+  
         @Override
         public String getAuthority() {
           return this.toString();
         }
       }
-    */
-      public enum Gender {
-        MALE,
-        FEMALE
-      }
-      public  int getId(){
-        return this.id;
-      }
-      public  String getUsername(){
-        return this.username;
-      }
-      public  String getPassword(){
-        return this.password;
-      }
-      public  String getEmail(){
-        return this.email;
-      }
-      public  Gender getGender(){
-        return this.gender;
-      }
-
     }
     
