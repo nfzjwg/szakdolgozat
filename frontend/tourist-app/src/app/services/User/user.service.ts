@@ -23,14 +23,16 @@ export class UserService {
     private localStorage: LocalStorageService
   ){}
 
-  async register(username : string, password : string, email : string){
+  async register(username : string, password : string, email : string, role: string){
     try{ 
       await this.http.post(`${this.url}/register`, 
       {
         username : username,
         password: password,
-        email: email
+        email: email,
+        role : role
       }, httpOptions).toPromise();
+      console.log("ok")
     return Promise.resolve(true);
     } catch (e) {
       console.log("error", e);

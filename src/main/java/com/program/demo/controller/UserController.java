@@ -9,8 +9,8 @@ import com.program.demo.security.AuthenticatedUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.security.access.annotation.Secured;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,12 +31,16 @@ public class UserController {
 
   @Autowired private UserRepository userRepository;
 
- // @Autowired private BCryptPasswordEncoder passwordEncoder;
+  @Autowired private BCryptPasswordEncoder passwordEncoder;
 
   @Autowired private AuthenticatedUser authenticatedUser;
 
+  /**
+   * Returns all the registerd users.
+   * @return ResponseEntity
+   */
   @GetMapping("")
-  //@Secured({"ROLE_AUTHOR", "ROLE_GUEST"})
+  //@Secured({"ROLE_ADMIN", "ROLE_GUEST"})
   public ResponseEntity<List<User>> getUsers() {
     List<User> users = userRepository.findAll();
     return ResponseEntity.ok(users);
@@ -55,16 +59,24 @@ public class UserController {
     }
     return ResponseEntity.notFound().build();
   }
+  /**
+   * Registers the given user.
+   * @param user The user that will be registerd.
+   * @return ResponseEntity
+   */
   @PostMapping("/register")
   public ResponseEntity<User> register(@RequestBody User user) {
     Optional<User> optionalAppUser = userRepository.findByUsername(user.getUsername());
     if (optionalAppUser.isPresent()) {
       return ResponseEntity.badRequest().build();
     }
-    user.setPassword(user.getPassword());
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
     return ResponseEntity.ok(userRepository.save(user));
   }
-
+  /**
+   * Logs in the user.
+   * @return ResponseEntity
+   */
   @PostMapping("login")
   public ResponseEntity login() {
     return ResponseEntity.ok(authenticatedUser.getUser());

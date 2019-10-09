@@ -28,12 +28,21 @@ public class CarsController{
 
     @Autowired private CarsRepository carRepository;
     @Autowired private UserRepository userRepository;
+    /**
+     * Returns all the cars presented in the Cars table.
+     * @return ResponseEntity
+     */
     @GetMapping("")
     public ResponseEntity<List<Cars>> getCars() {
         List<Cars> cars = carRepository.findAll();
         return ResponseEntity.ok(cars);
     }
-
+    /**
+     * Returns a car that is matcing the given id.
+     * @param id The id of the car.
+     * @return ResponseEntity
+     */
+    @GetMapping("/{id}")
     public ResponseEntity<Cars> getCar(@PathVariable Integer id) {
         Optional<Cars> optionalUser = carRepository.findById(id);
         if (optionalUser.isPresent()) {
@@ -41,6 +50,11 @@ public class CarsController{
         }
         return ResponseEntity.notFound().build();
     }
+    /**
+     * Deletes the car with the given id.
+     * @param id The id of the car.
+     * @return ResponseEntity
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Cars> deleteCar(@PathVariable Integer id) {
       Optional<Cars> optionalComment = carRepository.findById(id);
@@ -50,6 +64,12 @@ public class CarsController{
       }
       return ResponseEntity.notFound().build();
     }
+    /**
+     * Adds a car to the user given with the id.
+     * @param car The car.
+     * @param author The id of the user.
+     * @return
+     */
     @PostMapping("")
 
     public ResponseEntity<Cars> addCar(

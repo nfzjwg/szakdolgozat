@@ -17,7 +17,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import java.util.List;
-
+/**
+ * This class represents the users.
+ */
 
 @Data
 @Entity
