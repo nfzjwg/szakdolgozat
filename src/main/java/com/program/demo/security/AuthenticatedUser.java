@@ -17,10 +17,5 @@ import org.springframework.web.context.annotation.RequestScope;
 public class AuthenticatedUser {
 
   private User user;
-  public void setUser(User other){
-    this.user = other;
-  }
-  public User getUser(){
-    return this.user;
-  }
+
 }

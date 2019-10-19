@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
   this.userService.register(this.registerForm.value.username,this.registerForm.value.password,
       this.registerForm.value.email,this.registerForm.value.role).then((response) =>{
         if(response){
-          this.router.navigate(['/login']);
+          this.router.navigate(['users/login']);
         }
 	});
   }

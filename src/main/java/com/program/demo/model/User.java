@@ -55,39 +55,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Messages> message;
-
-    public  int getId(){
-      return this.id;
-    }
-    public  String getUsername(){
-      return this.username;
-    }
-    public  String getPassword(){
-      return this.password;
-    }
-    public  String getEmail(){
-      return this.email;
-    }
-    public Role getRole(){
-      return this.role;
-    }
-
-    public void setPassword(String pw){
-      this.password= pw;
-    }
-    public void setUsername(String name){
-      this.username= name;
-    }
-    public void setEmail(String email){
-      this.email= email;
-    }
-    public void setUser(User other){
-      this.username = other.username;
-      this.password = other.password;
-      this.email = other.email;
-      this.id = other.id;
-      this.role= other.role;
-      }
+    
       public enum Role implements GrantedAuthority {
         ROLE_GUEST,
         ROLE_COMPANY,
@@ -99,4 +67,3 @@ public class User {
         }
       }
     }
-    
