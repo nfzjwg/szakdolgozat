@@ -65,16 +65,16 @@ public class BikesController{
       return ResponseEntity.notFound().build();
     }
     /**
-     * Adds a motorcycle to an user.
+     * Adds a motorcycle to the table.
      * @param bike This is the motorcycle.
-     * @param author This is the user id.
+     * @param owner The id of the owner.
      * @return ResponseEntity
      */
     @PostMapping("")
 
     public ResponseEntity<Motobikes> addBike(
-        @RequestBody Motobikes bike, @PathParam(value = "author") Integer author) {
-        Optional<User> optionalUser = userRepository.findById(author);
+        @RequestBody Motobikes bike, @PathParam(value = "owner") Integer owner) {
+        Optional<User> optionalUser = userRepository.findById(owner);
         if (optionalUser.isPresent()) {
         
         return ResponseEntity.ok(bikeRepository.saveAndFlush(bike));

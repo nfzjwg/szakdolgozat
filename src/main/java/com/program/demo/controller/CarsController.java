@@ -12,6 +12,7 @@ import com.program.demo.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +51,18 @@ public class CarsController{
         }
         return ResponseEntity.notFound().build();
     }
+/**
+ * Returns all the cars that are the given owners cars.
+ * @param owner The id of the owner.  
+ * @return ResponsEntry
+ */
+    @GetMapping("/by-user")
+  //@Secured({"ROLE_AUTHOR", "ROLE_GUEST"})
+  public ResponseEntity<List<Cars>> getCarsByUser(@PathParam(value = "owner") Integer owner) {
+    List<Cars> cars = carRepository.findAllByOwnerId(owner);
+    return ResponseEntity.ok(cars);
+  }
+
     /**
      * Deletes the car with the given id.
      * @param id The id of the car.
@@ -65,16 +78,16 @@ public class CarsController{
       return ResponseEntity.notFound().build();
     }
     /**
-     * Adds a car to the user given with the id.
+     * Adds a car to the table.
      * @param car The car.
-     * @param author The id of the user.
+     * @param owner The id of the owner.
      * @return
      */
     @PostMapping("")
 
     public ResponseEntity<Cars> addCar(
-        @RequestBody Cars car, @PathParam(value = "author") Integer author) {
-        Optional<User> optionalUser = userRepository.findById(author);
+        @RequestBody Cars car, @PathParam(value = "owner") Integer owner) {
+        Optional<User> optionalUser = userRepository.findById(owner);
         if (optionalUser.isPresent()) {
         
         return ResponseEntity.ok(carRepository.saveAndFlush(car));

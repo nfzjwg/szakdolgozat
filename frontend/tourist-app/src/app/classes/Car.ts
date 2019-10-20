@@ -11,4 +11,5 @@ export class Car{
     ccm : number;
     ac : boolean;
     rented : boolean;
+    ownerID: number;
 }
