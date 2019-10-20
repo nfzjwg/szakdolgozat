@@ -77,7 +77,7 @@ public class BikesController{
         Optional<User> optionalUser = userRepository.findById(author);
         if (optionalUser.isPresent()) {
         
-        return ResponseEntity.ok(bikeRepository.save(bike));
+        return ResponseEntity.ok(bikeRepository.saveAndFlush(bike));
         }
         return ResponseEntity.notFound().build();
     }

@@ -77,7 +77,7 @@ public class CarsController{
         Optional<User> optionalUser = userRepository.findById(author);
         if (optionalUser.isPresent()) {
         
-        return ResponseEntity.ok(carRepository.save(car));
+        return ResponseEntity.ok(carRepository.saveAndFlush(car));
         }
 
         return ResponseEntity.notFound().build();

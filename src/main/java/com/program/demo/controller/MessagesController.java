@@ -61,7 +61,7 @@ public class MessagesController{
         Optional<User> optionalUser = userRepository.findById(author);
         if (optionalUser.isPresent()) {
         
-        return ResponseEntity.ok(messageRepository.save(message));
+        return ResponseEntity.ok(messageRepository.saveAndFlush(message));
         }
         return ResponseEntity.notFound().build();
     }

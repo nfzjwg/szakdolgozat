@@ -24,8 +24,8 @@ export class UserService {
   ){}
 
   async register(username : string, password : string, email : string, role: string){
-    try{ 
-      await this.http.post(`${this.url}/register`, 
+    try{
+      await this.http.post(`${this.url}/register`,
       {
         username : username,
         password: password,
@@ -45,30 +45,45 @@ export class UserService {
       "Authorization",
       `Basic ${token}`
     );
-
-    try{
-      const user = await this.http.post<User>(`${this.url}/login`, {}, httpOptions)
-      .toPromise()
-      this.user= user;
+    try {
+      const user = await this.http
+        .post<User>(`${this.url}/login`, {}, httpOptions)
+        .toPromise();
+        this.user = user;
+        console.log(this.isLoggedIn())
       this.localStorage.setUserData(user);
       this.localStorage.setToken(token);
+      console.log("user set")
       return Promise.resolve(true);
-    }catch (e) {
-      console.log("error", e);
+    } catch (e) {
+      console.log("hiba", e);
       return Promise.resolve(false);
     }
   }
+
   logout(){
     this.user= null;
     this.localStorage.removeToken();
     this.localStorage.removeUserData();
-
+    console.log("log out", this.isLoggedIn())
   }
   isLoggedIn(){
     return this.user != null;
   }
   getLoggedInUser(){
     return this.user;
+  }
+   setUser(user: User) {
+  	this.user = <any>{};
+	  this.user = user;
+  }
+  
+  setToken(token: string){
+    this.token = token;
+    httpOptions.headers = httpOptions.headers.set(
+      "Authorization",
+      `Basic ${token}`
+    );
   }
 
 }

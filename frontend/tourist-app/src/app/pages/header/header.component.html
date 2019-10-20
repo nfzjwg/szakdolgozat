@@ -14,9 +14,14 @@
             <img src="../../../assets/images/motor.png" alt="car_image">
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf ="userService.isLoggedIn() == false">
           <a class="nav-link"  routerLink="/users/login">
            Log in
+          </a>
+        </li>
+         <li class="nav-item" *ngIf = "userService.isLoggedIn()">
+          <a class="nav-link"  routerLink="/users/login" (click) = "userService.logout()">
+           Log out
           </a>
         </li>
         <li class="nav-item">

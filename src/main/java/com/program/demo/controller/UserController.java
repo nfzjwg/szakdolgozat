@@ -71,7 +71,7 @@ public class UserController {
       return ResponseEntity.badRequest().build();
     }
     user.setPassword(passwordEncoder.encode(user.getPassword()));
-    return ResponseEntity.ok(userRepository.save(user));
+    return ResponseEntity.ok(userRepository.saveAndFlush(user));
   }
   /**
    * Logs in the user.
