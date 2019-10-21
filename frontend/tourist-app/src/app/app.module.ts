@@ -11,6 +11,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from "@angular/common";
 import { LoginComponent } from './pages/login/login.component';
+import { CarComponent } from './pages/car/car.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LoginComponent } from './pages/login/login.component';
     TopPanelComponent,
     RegisterComponent,
     RegisterPanelComponent,
-    LoginComponent
+    LoginComponent,
+    CarComponent
   ],
   imports: [
     
