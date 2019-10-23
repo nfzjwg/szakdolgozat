@@ -83,14 +83,21 @@ public class CarsController{
      * @param owner The id of the owner.
      * @return
      */
-    @PostMapping("")
+    @PostMapping("/upload")
 
     public ResponseEntity<Cars> addCar(
         @RequestBody Cars car, @PathParam(value = "owner") Integer owner) {
         Optional<User> optionalUser = userRepository.findById(owner);
         if (optionalUser.isPresent()) {
-        
-        return ResponseEntity.ok(carRepository.saveAndFlush(car));
+          System.out.println("USER FOUND");
+          car.setOwner(optionalUser.get());
+          System.out.println(car.getModel());
+          System.out.println(car.getDoors());
+          System.out.println(car.getEngine());
+          System.out.println(car.getAc());
+          System.out.println(car.getRented());
+          Cars newCar = carRepository.saveAndFlush(car);
+        return ResponseEntity.ok(newCar);
         }
 
         return ResponseEntity.notFound().build();

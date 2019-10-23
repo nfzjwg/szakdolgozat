@@ -8,7 +8,7 @@ import { Car } from 'src/app/classes/Car';
 })
 export class CarService {
   userService : UserService
-  private url = "http://localhost:8080/users";
+  //private url = "http://localhost:8080/";
   constructor(
     private http: HttpClient
   ) { }
@@ -42,8 +42,8 @@ export class CarService {
 
   async addCar(manufacturer : string, model : string, doors : number,
      engine :  string, ccm: number, ac : boolean, rented  : boolean, owner : number){
-    
-    return this.http.post(`${this.url}/cars?owner` + owner,
+console.log(manufacturer);
+    return this.http.post(`http://localhost:8080/cars/upload?owner=`+owner,
       {
         "manufacturer " : manufacturer,
         "model" : model,

@@ -33,7 +33,8 @@ public class Cars {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id", updatable = false, nullable = false)
+    private int id;
   
     @Column(name = "manufacturer", nullable = false)
     private String manufacturer;
@@ -48,13 +49,13 @@ public class Cars {
     private String engine;
 
     @Column(name = "ccm", nullable = false)
-    private Integer ccm;
+    private int ccm;
 
     @Column(name = "ac")
     private Boolean ac;
 
     @Column(name = "rented")
-    private Boolean rendted ;
+    private Boolean rented ;
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "owner_id")
@@ -64,5 +65,50 @@ public class Cars {
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Rents> rent;
+    public void setManufacturer( String  other){
+        this.manufacturer = other;
+    }   
+    public void setModel(String  other){
+        this.model = other;
+    }   
+    public void setDoors( int  other){
+        this.doors = other;
+    }   
+    public void setEngine( String  other){
+        this.engine = other;
+    }   
+    public void setCcm( int  other){
+        this.ccm = other;
+    }  
+    public void setAc( Boolean  other){
+        this.ac = other;
+    }    
+    public void setRented( Boolean  other){
+        this.rented = other;
+    }   
+    public void setOwner( User other){
+        this.owner = other;
+    }   
+    public String getManufacturer(){
+        return this.manufacturer;
     }
+    public String getModel(){
+        return this.model;
+    }
+    public int getDoors(){
+        return this.doors;
+    }
+    public String getEngine(){
+        return this.engine;
+    }
+    public boolean getAc(){
+        return this.ac;
+    }
+    public boolean getRented(){
+        return this.rented;
+    }
+    public User getOwner(){
+        return this.owner;
+    }
+}
     

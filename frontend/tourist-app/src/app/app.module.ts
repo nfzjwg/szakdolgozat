@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from "@angular/common";
 import { LoginComponent } from './pages/login/login.component';
 import { CarComponent } from './pages/car/car.component';
+import { UploadcarComponent } from './pages/uploadcar/uploadcar.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CarComponent } from './pages/car/car.component';
     RegisterComponent,
     RegisterPanelComponent,
     LoginComponent,
-    CarComponent
+    CarComponent,
+    UploadcarComponent
   ],
   imports: [
     

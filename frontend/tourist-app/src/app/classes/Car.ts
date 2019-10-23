@@ -1,7 +1,8 @@
 export class Car{
 
-    constructor(){
-
+    constructor(manufacturer : string, model : string){
+        this.manufacturer = manufacturer;
+        this.model = model;
     }
     id : number;
     manufacturer : string;
