@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +39,7 @@ public class UserController {
    * @return ResponseEntity
    */
   @GetMapping("")
-  //@Secured({"ROLE_ADMIN", "ROLE_GUEST"})
+  @Secured({"ROLE_ADMIN", "ROLE_GUEST"})
   public ResponseEntity<List<User>> getUsers() {
     List<User> users = userRepository.findAll();
     return ResponseEntity.ok(users);
@@ -66,19 +65,22 @@ public class UserController {
    */
   @PostMapping("/register")
   public ResponseEntity<User> register(@RequestBody User user) {
+    User newUser;
+    System.out.println("USERNAME"+ user.getEmail());
     Optional<User> optionalAppUser = userRepository.findByUsername(user.getUsername());
     if (optionalAppUser.isPresent()) {
       return ResponseEntity.badRequest().build();
     }
     user.setPassword(passwordEncoder.encode(user.getPassword()));
-    return ResponseEntity.ok(userRepository.saveAndFlush(user));
+    newUser=userRepository.saveAndFlush(user);
+    return  ResponseEntity.ok(newUser);
   }
   /**
    * Logs in the user.
    * @return ResponseEntity
    */
   @PostMapping("login")
-  public ResponseEntity login() {
+  public ResponseEntity<User> login() {
     return ResponseEntity.ok(authenticatedUser.getUser());
   }
 

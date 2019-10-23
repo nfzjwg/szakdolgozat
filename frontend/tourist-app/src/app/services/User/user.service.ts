@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpResponse } from "@angular/common/http";
+import { HttpHeaders, HttpClient, HttpResponse, HttpErrorResponse } from "@angular/common/http";
 import { User } from 'src/app/classes/User';
 import { LocalStorageService } from '../Local Storage/local-storage.service';
 
@@ -24,13 +24,16 @@ export class UserService {
   ){}
 
   async register(username : string, password : string, email : string, role: string){
+    console.log(username, password,role,email);
+    
     try{
       await this.http.post(`${this.url}/register`,
       {
-        username : username,
-        password: password,
-        email: email,
-        role : role
+        "username" : username,
+        "password": password,
+        "email": email,
+        "role" : role
+        
       }, httpOptions).toPromise();
       console.log("ok")
     return Promise.resolve(true);
@@ -49,6 +52,7 @@ export class UserService {
       const user = await this.http
         .post<User>(`${this.url}/login`, {}, httpOptions)
         .toPromise();
+        console.log("passed");
         this.user = user;
         console.log(this.isLoggedIn())
       this.localStorage.setUserData(user);
@@ -85,5 +89,14 @@ export class UserService {
       `Basic ${token}`
     );
   }
+   async getUsers(){
+    return this.http.get<User[]>(
+      `http://localhost:8080/users`,      
+      httpOptions
+    ).toPromise().catch((error:HttpErrorResponse) => {
+      return new Array<User>()
+    });
+  }
+
 
 }

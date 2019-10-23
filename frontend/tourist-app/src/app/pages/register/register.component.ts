@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/User/user.service';
+import { User } from 'src/app/classes/User';
 
 
 @Component({
@@ -28,10 +29,12 @@ export class RegisterComponent implements OnInit {
       return;
   	}
 	console.log("register");
-	
   this.userService.register(this.registerForm.value.username,this.registerForm.value.password,
       this.registerForm.value.email,this.registerForm.value.role).then((response) =>{
         if(response){
+          
+          console.log(this.registerForm.value.username);
+          console.log(this.registerForm.value.email);
           this.router.navigate(['users/login']);
         }
 	});

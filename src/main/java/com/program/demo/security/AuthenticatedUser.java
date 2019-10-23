@@ -18,4 +18,11 @@ public class AuthenticatedUser {
 
   private User user;
 
+  public User getUser(){
+    return this.user;
+  }
+  public void setUser( User other){
+    this.user = other;
+  }
+
 }

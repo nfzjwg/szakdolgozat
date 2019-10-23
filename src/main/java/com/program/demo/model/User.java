@@ -34,9 +34,10 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+   @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+	private int id;
   
     @Column(name = "username", nullable = false)
     private String username;
@@ -77,5 +78,23 @@ public class User {
         public String getAuthority() {
           return this.toString();
         }
+      }
+      public String getUsername(){
+        return this.username;
+      }
+      public String getPassword(){
+        return this.password;
+      }
+      public String getEmail(){
+        return this.email;
+      }
+      public int getId(){
+        return this.id;
+      }
+      public String getRole(){
+        return this.role.toString();
+      }
+      public void setPassword(String other){
+        this.password= other;
       }
     }
