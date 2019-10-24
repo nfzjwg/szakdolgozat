@@ -13,4 +13,5 @@ public interface BikesRepository extends JpaRepository<Motobikes, Integer> {
 
   Optional<Motobikes> findById(Integer bike_id);
   List<Motobikes> findAll();
+  List<Motobikes> findAllByOwnerId(Integer ownerId);
 }

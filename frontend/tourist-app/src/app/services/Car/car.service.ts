@@ -41,17 +41,18 @@ export class CarService {
 
 
   async addCar(manufacturer : string, model : string, doors : number,
-     engine :  string, ccm: number, ac : boolean, rented  : boolean, owner : number){
+     engine :  string, ccm: number, ac : boolean, rented  : boolean,  owner : number){
 console.log(manufacturer);
     return this.http.post(`http://localhost:8080/cars/upload?owner=`+owner,
       {
-        "manufacturer " : manufacturer,
+        "manufacturer" : manufacturer,
         "model" : model,
         "doors" : doors,
         "engine" : engine,
         "ccm" : ccm,
         "ac" : ac,
         "rented" : rented
+       
       }, httpOptions).toPromise();
     }
 }

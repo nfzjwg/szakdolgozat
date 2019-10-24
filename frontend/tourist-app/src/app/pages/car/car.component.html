@@ -2,8 +2,12 @@
     <ul class="list-group">
         <li class="list-group-item card" *ngFor="let car of cars" > 
             <div class="card-body">
-                <h1 class="card-title">{{car.manufacturer}}</h1>
-                <p class="card-text">{{car.model}}...</p>
+                <h2 class="card-title">{{car.manufacturer}} {{car.model}}</h2>
+                <p class="card-text">Number of doors: {{car.doors}}</p>
+                <p class="card-text">Fuel: {{car.engine}}</p>
+                <p class="card-text">Ccm: {{car.ccm}}</p>
+                <p class="card-text">Air condtitoner: {{car.ac}}</p>
+                <p class="card-text">Company: {{car.owner.username}}</p>
                 
             </div>
         </li>

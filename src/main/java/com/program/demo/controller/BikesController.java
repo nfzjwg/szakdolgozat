@@ -12,6 +12,7 @@ import com.program.demo.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,20 +65,35 @@ public class BikesController{
       }
       return ResponseEntity.notFound().build();
     }
+
+/**
+ * Returns all the motobikes that are the given owner's motobikes.
+ * @param owner The id of the owner.  
+ * @return ResponsEntry
+ */
+@GetMapping("/by-user")
+  
+public ResponseEntity<List<Motobikes>> getCarsByUser(@PathParam(value = "owner") Integer owner) {
+  List<Motobikes> cars = bikeRepository.findAllByOwnerId(owner);
+  return ResponseEntity.ok(cars);
+}
+
+
     /**
      * Adds a motorcycle to the table.
      * @param bike This is the motorcycle.
      * @param owner The id of the owner.
      * @return ResponseEntity
      */
-    @PostMapping("")
-
+    @PostMapping("/upload")
+    @Secured({"ROLE_ADMIN", "ROLE_COMPANY"})
     public ResponseEntity<Motobikes> addBike(
         @RequestBody Motobikes bike, @PathParam(value = "owner") Integer owner) {
         Optional<User> optionalUser = userRepository.findById(owner);
         if (optionalUser.isPresent()) {
-        
-        return ResponseEntity.ok(bikeRepository.saveAndFlush(bike));
+        bike.setOwner(optionalUser.get());
+        Motobikes newBike = bikeRepository.saveAndFlush(bike);
+        return ResponseEntity.ok(newBike);
         }
         return ResponseEntity.notFound().build();
     }

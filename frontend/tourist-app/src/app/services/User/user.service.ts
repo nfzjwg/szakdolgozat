@@ -97,6 +97,12 @@ export class UserService {
       return new Array<User>()
     });
   }
+  isAdmin(){
+    return this.user.role == "ROLE_ADMIN";
+  }
+  isCompany(){
+    return this.user.role == "ROLE_COMPANY";
+  }
 
 
 }

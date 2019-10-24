@@ -6,6 +6,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { CarComponent } from './pages/car/car.component';
 import { UploadcarComponent } from './pages/uploadcar/uploadcar.component';
+import { MotorcycleComponent } from './pages/motobikes/motorcycle.component';
+import { UploadmotobikeComponent } from './pages/uploadmotobike/uploadmotobike.component';
 
 
 
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path : "users/login", component : LoginComponent},
   { path : "cars" , component : CarComponent},
   { path : "cars/upload" , component : UploadcarComponent},
+  { path : "motobikes" , component : MotorcycleComponent},
+  { path : "motobikes/upload" , component : UploadmotobikeComponent}
 ];
 
 @NgModule({

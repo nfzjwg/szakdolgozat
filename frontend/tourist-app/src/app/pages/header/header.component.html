@@ -14,9 +14,14 @@
             <img src="../../../assets/images/motor.png" alt="car_image">
           </a>
         </li>
-        <li class="nav-item" *ngIf ="userService.isLoggedIn()">
+        <li class="nav-item" *ngIf ="userService.isLoggedIn() && (userService.isAdmin() || userService.isCompany()) ">
           <a class="nav-link"  routerLink="/cars/upload">
            Upload car
+          </a>
+        </li>
+        <li class="nav-item" *ngIf ="userService.isLoggedIn() && (userService.isAdmin() || userService.isCompany()) ">
+          <a class="nav-link"  routerLink="/motobikes/upload">
+           Upload motobike
           </a>
         </li>
         <li class="nav-item" *ngIf ="userService.isLoggedIn() == false">

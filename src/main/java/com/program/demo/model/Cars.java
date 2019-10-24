@@ -56,6 +56,7 @@ public class Cars {
 
     @Column(name = "rented")
     private Boolean rented ;
+
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "owner_id")
@@ -100,6 +101,9 @@ public class Cars {
     }
     public String getEngine(){
         return this.engine;
+    }
+    public int getCcm(){
+        return this.ccm;
     }
     public boolean getAc(){
         return this.ac;

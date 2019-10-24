@@ -15,8 +15,8 @@ export class CarComponent implements OnInit {
     this.userService = userService
   }
   async ngOnInit() {
-     this.cars = await this.carService.getCars()
-
+    this.cars = await this.carService.getCars()
+    console.log(this.cars)
   }
-
+  
 }

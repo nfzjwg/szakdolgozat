@@ -1,7 +1,7 @@
 <div class="back">
-    <section id="uploadcar" class="container">
+    <section id="uploadmotobike" class="container">
       <h1 class="text-center">Register</h1>
-      <form class="form" [formGroup]="uploadCarForm" (ngSubmit)="uploadCar()">
+      <form class="form" [formGroup]="uploadMotobikeForm" (ngSubmit)="uploadMotobike()">
         <div class="form-group">
           <label for="manufacturer">Manufacturer</label>
           <input type="text" class="form-control" id="manufacturer" autocomplete="off" formControlName="manufacturer" />
@@ -11,23 +11,8 @@
           <input type="text" class="form-control" id="model" formControlName="model" />
         </div>
         <div class="form-group">
-          <label for="doors">Doors</label>
-          <input type="text" class="form-control" id="doors" formControlName="doors" />
-        </div>
-        <div class="form-group">
-          <label for="engine">Fule type</label>
-          <input type="text" class="form-control" id="engine" formControlName="engine" />
-        </div>
-        <div class="form-group">
           <label for="ccm">Ccm</label>
           <input type="text" class="form-control" id="ccm" formControlName="ccm" />
-        </div>
-        <div class="form-group">
-          <label for="role" >Air conditioner</label>
-          <select formControlName ="ac" id="ac" class="form-control">
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-          </select>
         </div>
         <div class="button-holder">
             <input type="submit" class="btn btn-primary" value ="Upload">

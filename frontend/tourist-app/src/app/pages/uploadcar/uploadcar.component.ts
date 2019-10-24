@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/User/user.service';
 })
 export class UploadcarComponent implements OnInit {
   uploadCarForm : FormGroup;
+  air : boolean;
   constructor(private fb : FormBuilder, private router : Router,private carService : CarService, private userService: UserService) { 
     this.uploadCarForm = this.fb.group({
       manufacturer : ["", Validators.required],
@@ -29,11 +30,15 @@ export class UploadcarComponent implements OnInit {
       console.log("hiba");
       return;
     }
-    console.log(this.uploadCarForm.value.ac)
+    if(this.uploadCarForm.value.ac == "Yes"){
+      this.air = true;
+    }else{
+      this.air = false;
+    }
     this.carService.addCar(this.uploadCarForm.value.manufacturer,
       this.uploadCarForm.value.model, Number(this.uploadCarForm.value.doors), 
       this.uploadCarForm.value.engine, Number(this.uploadCarForm.value.ccm),
-      this.uploadCarForm.value.ac, false, this.userService.user.id).then((response) =>{
+      this.air, false, this.userService.user.id).then((response) =>{
         if(response){
           console.log("uploaded");
         }

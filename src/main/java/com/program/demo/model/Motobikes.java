@@ -46,7 +46,7 @@ public class Motobikes {
 
 
     @Column(name = "rented")
-    private Boolean rendted ;
+    private Boolean rented ;
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "owner_id")
@@ -55,5 +55,35 @@ public class Motobikes {
     @OneToMany(mappedBy = "motobike", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Rents> rent;
+    public void setManufacturer( String  other){
+        this.manufacturer = other;
+    }   
+    public void setModel(String  other){
+        this.model = other;
+    }   
+    public void setCcm( int  other){
+        this.ccm = other;
+    }  
+    public void setRented( Boolean  other){
+        this.rented = other;
+    }   
+    public void setOwner( User other){
+        this.owner = other;
+    }   
+    public String getManufacturer(){
+        return this.manufacturer;
     }
+    public String getModel(){
+        return this.model;
+    }
+    public int getCcm(){
+        return this.ccm;
+    }
+    public boolean getRented(){
+        return this.rented;
+    }
+    public User getOwner(){
+        return this.owner;
+    }
+}
     

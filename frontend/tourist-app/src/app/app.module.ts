@@ -13,6 +13,8 @@ import { CommonModule } from "@angular/common";
 import { LoginComponent } from './pages/login/login.component';
 import { CarComponent } from './pages/car/car.component';
 import { UploadcarComponent } from './pages/uploadcar/uploadcar.component';
+import { MotorcycleComponent } from './pages/motobikes/motorcycle.component';
+import { UploadmotobikeComponent } from './pages/uploadmotobike/uploadmotobike.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { UploadcarComponent } from './pages/uploadcar/uploadcar.component';
     RegisterPanelComponent,
     LoginComponent,
     CarComponent,
-    UploadcarComponent
+    UploadcarComponent,
+    MotorcycleComponent,
+    UploadmotobikeComponent
   ],
   imports: [
     

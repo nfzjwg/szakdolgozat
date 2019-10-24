@@ -57,7 +57,7 @@ public class CarsController{
  * @return ResponsEntry
  */
     @GetMapping("/by-user")
-  //@Secured({"ROLE_AUTHOR", "ROLE_GUEST"})
+  
   public ResponseEntity<List<Cars>> getCarsByUser(@PathParam(value = "owner") Integer owner) {
     List<Cars> cars = carRepository.findAllByOwnerId(owner);
     return ResponseEntity.ok(cars);
@@ -84,18 +84,12 @@ public class CarsController{
      * @return
      */
     @PostMapping("/upload")
-
+    @Secured({"ROLE_ADMIN", "ROLE_COMPANY"})
     public ResponseEntity<Cars> addCar(
         @RequestBody Cars car, @PathParam(value = "owner") Integer owner) {
         Optional<User> optionalUser = userRepository.findById(owner);
         if (optionalUser.isPresent()) {
-          System.out.println("USER FOUND");
           car.setOwner(optionalUser.get());
-          System.out.println(car.getModel());
-          System.out.println(car.getDoors());
-          System.out.println(car.getEngine());
-          System.out.println(car.getAc());
-          System.out.println(car.getRented());
           Cars newCar = carRepository.saveAndFlush(car);
         return ResponseEntity.ok(newCar);
         }
