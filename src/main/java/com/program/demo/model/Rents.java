@@ -52,7 +52,7 @@ public class Rents {
     private User user;
     
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "car_id")
     private Cars car;
 

@@ -94,8 +94,8 @@ public class RentController{
         @PathParam(value = "car_id") Integer car_id,
         @PathParam(value = "motobike_id") Integer motobike_id) {
           System.out.println(user_id);
-          System.out.println(car_id);
-          System.out.println(motobike_id);
+          System.out.println("car" + car_id);
+          System.out.println("bike" +motobike_id);
         Optional<User> optionalUser = userRepository.findById(user_id);
         Optional<Cars> optionalCar = null;
         if(car_id != 0){
@@ -105,9 +105,11 @@ public class RentController{
         }
         Optional<Motobikes> optionalBike = null;
         if(motobike_id != 0 ){
+          Motobikes helper = bikeRepository.findById(motobike_id).get();
+          helper.setRented(true);
           optionalBike= bikeRepository.findById(motobike_id);
         }
-        if (optionalUser.isPresent() && optionalCar.isPresent() &&
+        if (optionalUser.isPresent() && car_id !=0  &&
         motobike_id == 0) {
           rent.setUser(optionalUser.get());
           rent.setCar(optionalCar.get());
@@ -115,7 +117,7 @@ public class RentController{
           Rents newRent = rentRepository.saveAndFlush(rent);
         return ResponseEntity.ok(newRent);
         }
-        else if(optionalUser.isPresent() && optionalBike.isPresent() &&
+        else if(optionalUser.isPresent() && motobike_id != 0 &&
         car_id == 0){
           rent.setUser(optionalUser.get());
           rent.setMotobike(optionalBike.get());

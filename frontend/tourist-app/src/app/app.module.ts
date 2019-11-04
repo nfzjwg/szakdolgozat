@@ -16,6 +16,7 @@ import { UploadcarComponent } from './pages/uploadcar/uploadcar.component';
 import { MotorcycleComponent } from './pages/motobikes/motorcycle.component';
 import { UploadmotobikeComponent } from './pages/uploadmotobike/uploadmotobike.component';
 import { CarRentComponent } from './pages/car-rent/car-rent.component';
+import { RentalComponent } from './pages/rental/rental.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { CarRentComponent } from './pages/car-rent/car-rent.component';
     UploadcarComponent,
     MotorcycleComponent,
     UploadmotobikeComponent,
-    CarRentComponent
+    CarRentComponent,
+    RentalComponent
   ],
   imports: [
     

@@ -40,12 +40,11 @@ export class RentService {
 
 
   async addRent(carID : number, motobikeID : number){
-    
+      console.log(motobikeID)
       const start = formatDate(Date.now(), "yyyy-MM-dd HH:mm:ss", "en-US");
     return this.http.post(`http://localhost:8080/rents/upload?user_id=${this.userService.user.id}&car_id=${carID}&motobike_id=${motobikeID}`,
       {
         "start" : start,
-        "end" : start
       }, httpOptions).toPromise();
     }
 }

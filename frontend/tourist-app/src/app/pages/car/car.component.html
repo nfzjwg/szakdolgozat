@@ -1,7 +1,7 @@
 <div class=container style="margin-top:50px; margin-bottom: 50px;">
-    <ul class="list-group">
-        <li class="list-group-item card" *ngFor="let car of cars" > 
-            <div class="card bg-light mb-3">
+    <ul class="list-group" *ngFor="let car of cars">
+        <li class="list-group-item card" *ngIf = "car.rented==false" > 
+            <div class="card bg-light mb-3" >
                 <table>
                     <tr>
                     <th></th>

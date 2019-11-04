@@ -1,6 +1,6 @@
 <div class=container style="margin-top:50px; margin-bottom: 50px;" style="width: 45rem;">
-    <ul class="list-group">
-        <li class="list-group-item card" *ngFor="let motor of motobikes" > 
+    <ul class="list-group" *ngFor="let motor of motobikes">
+        <li class="list-group-item card" *ngIf =" motor.rented == false"> 
             <div class="card bg-light mb-3">
                 <table>
                     <tr>
@@ -22,7 +22,7 @@
                     </tr>
                 </table>
                 <div class="button-holder" *ngIf = "motor.rented==false">
-                    <input type="button" class="btn btn-primary" value ="Rent" routerLink="/motobikes/rent">
+                    <input type="button" class="btn btn-primary" value ="Rent"  (click)="rentBike(motor.id)">
                 </div>
             </div>
         </li>

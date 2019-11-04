@@ -33,7 +33,8 @@ public class Motobikes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id", updatable = false, nullable = false)
+    private int id;
   
     @Column(name = "manufacturer", nullable = false)
     private String manufacturer;
@@ -84,6 +85,9 @@ public class Motobikes {
     }
     public User getOwner(){
         return this.owner;
+    }
+    public int getId(){
+        return this.id;
     }
 }
     
