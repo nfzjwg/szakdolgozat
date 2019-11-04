@@ -1,14 +1,42 @@
 <div class=container style="margin-top:50px; margin-bottom: 50px;">
     <ul class="list-group">
         <li class="list-group-item card" *ngFor="let car of cars" > 
-            <div class="card-body">
-                <h2 class="card-title">{{car.manufacturer}} {{car.model}}</h2>
-                <p class="card-text">Number of doors: {{car.doors}}</p>
-                <p class="card-text">Fuel: {{car.engine}}</p>
-                <p class="card-text">Ccm: {{car.ccm}}</p>
-                <p class="card-text">Air condtitoner: {{car.ac}}</p>
-                <p class="card-text">Company: {{car.owner.username}}</p>
-                
+            <div class="card bg-light mb-3">
+                <table>
+                    <tr>
+                    <th></th>
+                    <th></th>
+                    
+                    </tr>
+                    <tr>
+                    <td> <h2 class="card-title">{{car.manufacturer}} {{car.model}}</h2></td>
+                    <td rowspan="6"><img src="../../../assets/images/carImage.png" alt="Car image" style="margin-left: 20rem;"></td>
+                    </tr>
+                    <tr>
+                            <p class="card-text">Number of doors: {{car.doors}}</p>
+                        <td></td>
+                    </tr>
+                    <tr>
+                            <p class="card-text">Fuel: {{car.engine}}</p>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <p class="card-text">Ccm: {{car.ccm}}</p>
+                    <td></td>
+                    </tr>
+                    <tr>
+                            <p class="card-text"*ngIf = "car.ac==false">Air condtitoner: No</p>
+                            <p class="card-text"*ngIf = "car.ac==true">Air condtitoner: Yes</p>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td> <p class="card-text">Company: {{car.owner.username}}</p></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <div class="button-holder" *ngIf = "car.rented==false">
+                        <input type="button" class="btn btn-primary" value ="Rent" (click)="rentCar(car.id)">
+                </div>
             </div>
         </li>
     </ul>

@@ -70,9 +70,9 @@ public class CarsController{
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Cars> deleteCar(@PathVariable Integer id) {
-      Optional<Cars> optionalComment = carRepository.findById(id);
-      if (optionalComment.isPresent()) {
-        carRepository.delete(optionalComment.get());
+      Optional<Cars> optionalCar = carRepository.findById(id);
+      if (optionalCar.isPresent()) {
+        carRepository.delete(optionalCar.get());
         return ResponseEntity.ok().build();
       }
       return ResponseEntity.notFound().build();

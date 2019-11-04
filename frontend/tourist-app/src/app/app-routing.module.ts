@@ -8,6 +8,7 @@ import { CarComponent } from './pages/car/car.component';
 import { UploadcarComponent } from './pages/uploadcar/uploadcar.component';
 import { MotorcycleComponent } from './pages/motobikes/motorcycle.component';
 import { UploadmotobikeComponent } from './pages/uploadmotobike/uploadmotobike.component';
+import { CarRentComponent } from './pages/car-rent/car-rent.component';
 
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path : "users/login", component : LoginComponent},
   { path : "cars" , component : CarComponent},
   { path : "cars/upload" , component : UploadcarComponent},
+  { path : "cars/rent" , component : CarRentComponent},
   { path : "motobikes" , component : MotorcycleComponent},
   { path : "motobikes/upload" , component : UploadmotobikeComponent}
 ];

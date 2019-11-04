@@ -90,6 +90,9 @@ public class Cars {
     public void setOwner( User other){
         this.owner = other;
     }   
+    public int getId(){
+        return this.id;
+      }
     public String getManufacturer(){
         return this.manufacturer;
     }

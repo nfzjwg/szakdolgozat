@@ -1,11 +1,29 @@
-<div class=container style="margin-top:50px; margin-bottom: 50px;">
+<div class=container style="margin-top:50px; margin-bottom: 50px;" style="width: 45rem;">
     <ul class="list-group">
         <li class="list-group-item card" *ngFor="let motor of motobikes" > 
-            <div class="card-body">
-                <h2 class="card-title">{{motor.manufacturer}} {{motor.model}}</h2>
-                <p class="card-text">Ccm: {{motor.ccm}}</p>
-                <p class="card-text">Company: {{motor.owner.username}}</p>
-                
+            <div class="card bg-light mb-3">
+                <table>
+                    <tr>
+                    <th></th>
+                    <th></th>
+                    
+                    </tr>
+                    <tr>
+                    <td> <h2 class="card-title">{{motor.manufacturer}} {{motor.model}}</h2></td>
+                    <td rowspan="3"><img src="../../../assets/images/motobikeImage.png" alt="Motobike image" style="margin-left: 20rem;"></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text">Ccm: {{motor.ccm}}</p></td>
+                    <td></td>
+                    </tr>
+                    <tr>
+                        <td> <p class="card-text">Company: {{motor.owner.username}}</p></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <div class="button-holder" *ngIf = "motor.rented==false">
+                    <input type="button" class="btn btn-primary" value ="Rent" routerLink="/motobikes/rent">
+                </div>
             </div>
         </li>
     </ul>

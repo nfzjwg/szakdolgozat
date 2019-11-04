@@ -52,5 +52,7 @@ export class MotobikeService {
         "rented" : rented
       }, httpOptions).toPromise();
     }
+
+    
 }
 

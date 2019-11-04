@@ -12,6 +12,5 @@ export class Car{
     ccm : number;
     ac : boolean;
     rented : boolean;
-    image : string;
     ownerID: number;
 }
