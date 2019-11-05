@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Rent } from 'src/app/classes/Rent';
 import { UserService } from 'src/app/services/User/user.service';
 import { RentService } from 'src/app/services/Rent/rent.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rental',
@@ -12,7 +13,7 @@ export class RentalComponent implements OnInit {
   rents : Rent[]
   private userService : UserService
   private rentService : RentService
-  constructor( rentService : RentService,  userService : UserService) {
+  constructor( private router : Router ,rentService : RentService,  userService : UserService) {
     this.rentService = rentService;
     this.userService = userService;
    }
@@ -22,7 +23,7 @@ export class RentalComponent implements OnInit {
     console.log(this.rents)
   }
   returnRentedItem(id : number){
-    console.log("here will be returned "+ id  )
-    this.rentService.getRent(id)
+    this.rentService.returnRentedItem(id)
+    this.router.navigate(['home']);
   }
 }

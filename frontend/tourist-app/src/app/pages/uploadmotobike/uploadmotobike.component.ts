@@ -35,6 +35,7 @@ export class UploadmotobikeComponent implements OnInit {
           console.log("uploaded");
         }
       })
+      this.router.navigate(['motobikes']);
   }
 
 }

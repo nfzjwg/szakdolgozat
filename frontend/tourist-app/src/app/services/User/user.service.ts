@@ -103,6 +103,9 @@ export class UserService {
   isCompany(){
     return this.user.role == "ROLE_COMPANY";
   }
+  isGuest(){
+    return this.user.role == "ROLE_GUEST";
+  }
 
 
 }

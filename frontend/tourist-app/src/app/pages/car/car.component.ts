@@ -3,6 +3,7 @@ import { Car } from 'src/app/classes/Car';
 import { CarService } from 'src/app/services/Car/car.service';
 import { UserService } from 'src/app/services/User/user.service';
 import { RentService } from 'src/app/services/Rent/rent.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-car',
@@ -14,7 +15,7 @@ export class CarComponent implements OnInit {
   car : Car
   private userService :UserService
   private rentService : RentService
-  constructor(private carService : CarService, rentService : RentService,userService :UserService) { 
+  constructor(private router : Router, private carService : CarService, rentService : RentService,userService :UserService) { 
     this.userService = userService;
     this.rentService = rentService;
   }
@@ -25,6 +26,7 @@ export class CarComponent implements OnInit {
   rentCar(id :number){
   
     this.rentService.addRent(id,0);
+    this.router.navigate(['rents']);
     console.log(this.carService.getCar(id))
   }
 }

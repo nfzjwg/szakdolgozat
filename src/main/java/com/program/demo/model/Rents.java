@@ -78,6 +78,9 @@ public class Rents {
     public Motobikes getMotobike(){
       return this.motobike;
     }
+    public void setId(int id){
+      this.id = id;
+    }
     public void setStart(Date other){
       this.start = other;
     }

@@ -43,6 +43,7 @@ export class UploadcarComponent implements OnInit {
           console.log("uploaded");
         }
       })
+      this.router.navigate(['cars']);
   }
 
 }

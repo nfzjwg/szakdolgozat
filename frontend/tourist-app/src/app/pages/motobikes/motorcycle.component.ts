@@ -3,6 +3,7 @@ import { Motobike } from 'src/app/classes/Motobike';
 import { UserService } from 'src/app/services/User/user.service';
 import { MotobikeService } from 'src/app/services/Motobike/motobike.service';
 import { RentService } from 'src/app/services/Rent/rent.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-motorcycle',
@@ -13,7 +14,7 @@ export class MotorcycleComponent implements OnInit {
   motobikes : Motobike[]
   private userService :UserService
   private rentService : RentService
-  constructor(private motobikeService : MotobikeService, rentService : RentService, userService :UserService) { 
+  constructor(private router : Router, private motobikeService : MotobikeService, rentService : RentService, userService :UserService) { 
     this.userService = userService;
     this.rentService = rentService;
   }
@@ -23,6 +24,6 @@ export class MotorcycleComponent implements OnInit {
   }
   rentBike(id :number){
     this.rentService.addRent(0,id);
-    console.log(this.motobikeService.getMotobike(id))
+    this.router.navigate(['rents']);
   }
 }

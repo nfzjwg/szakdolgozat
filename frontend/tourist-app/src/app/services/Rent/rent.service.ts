@@ -46,5 +46,19 @@ export class RentService {
       {
         "start" : start,
       }, httpOptions).toPromise();
+      
     }
-}
+    async returnRentedItem(id :number) {
+      const end = formatDate(Date.now()+1, "yyyy-MM-dd HH:mm:ss", "en-US");
+      await this.http.put(`http://localhost:8080/rents/${id}`, 
+      {
+        "end" : end
+      }, httpOptions).toPromise();
+      return Promise.resolve(true);
+    } catch (e) {
+      console.log("hiba", e);
+      return Promise.resolve(false);
+    }
+    
+  }
+

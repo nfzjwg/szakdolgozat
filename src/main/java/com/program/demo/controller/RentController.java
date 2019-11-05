@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -93,9 +94,6 @@ public class RentController{
         @RequestBody Rents rent, @PathParam(value = "user_id") Integer user_id,
         @PathParam(value = "car_id") Integer car_id,
         @PathParam(value = "motobike_id") Integer motobike_id) {
-          System.out.println(user_id);
-          System.out.println("car" + car_id);
-          System.out.println("bike" +motobike_id);
         Optional<User> optionalUser = userRepository.findById(user_id);
         Optional<Cars> optionalCar = null;
         if(car_id != 0){
@@ -130,5 +128,31 @@ public class RentController{
         return ResponseEntity.notFound().build();
     }
 
-  
+  /**
+   * Updates the rent with the provided id if it exists.
+   * @param rent The new rent data.
+   * @param id The id of the rent.
+   * @return ResponseEntity
+   */
+  @PutMapping("/{id}")
+  public ResponseEntity<Rents> returnRentedItem(@RequestBody Rents rent, @PathVariable Integer id) {
+    Optional<Rents> optionalRent = rentRepository.findById(id);
+    if (optionalRent.isPresent()) {
+      Rents oldRent = optionalRent.get();
+      rent.setId(oldRent.getId());
+      rent.setStart(oldRent.getStart());
+      rent.setUser(oldRent.getUser());
+      rent.setCar(oldRent.getCar());
+      rent.setMotobike(oldRent.getMotobike());
+      if(rent.getCar() != null){
+        rent.getCar().setRented(!rent.getCar().getRented());
+      }
+      if(rent.getMotobike() != null){
+        rent.getMotobike().setRented(!rent.getMotobike().getRented());
+      }
+      return ResponseEntity.ok(rentRepository.save(rent));
+    }
+    return ResponseEntity.notFound().build();
+  }
+
 }
