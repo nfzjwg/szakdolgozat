@@ -1,0 +1,9 @@
+<div class="card" style="max-width: 18rem;">
+    <div class="card-body"  *ngIf="userService.isLoggedIn()">
+      <img class="rounded-circle rounded mx-auto d-block" src="../../../assets/images/defaultPicture.png"  alt="profile pic" height="150" width="150" >
+      <h5 class="text-center">Username: {{ userService.user.username }}</h5>
+      <h5 class="text-center">E-mail:  {{ userService.user.email }}</h5>
+      <h5 class="text-center" >Role:  {{ userService.user.role }}</h5>
+    </div>
+  </div>
+  

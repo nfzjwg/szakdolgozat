@@ -68,6 +68,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Messages> message;
+
+    
     
       public enum Role implements GrantedAuthority {
         ROLE_GUEST,

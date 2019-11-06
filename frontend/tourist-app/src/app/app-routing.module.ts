@@ -11,6 +11,7 @@ import { UploadmotobikeComponent } from './pages/uploadmotobike/uploadmotobike.c
 import { CarRentComponent } from './pages/car-rent/car-rent.component';
 import { RentalComponent } from './pages/rental/rental.component';
 import { UserRentsComponent } from './pages/user-rents/user-rents.component';
+import { ProfilePanelComponent } from './pages/profile-panel/profile-panel.component';
 
 
 
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path : "motobikes" , component : MotorcycleComponent},
   { path : "motobikes/upload" , component : UploadmotobikeComponent},
   { path : "rents" , component : RentalComponent},
-  { path : "rentsByUser" , component : UserRentsComponent}
+  { path : "rentsByUser" , component : UserRentsComponent},
+  { path : "profile" , component : ProfilePanelComponent}
 ];
 
 @NgModule({

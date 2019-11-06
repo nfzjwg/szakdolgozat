@@ -22,7 +22,8 @@
                     </tr>
                 </table>
                 <div class="button-holder" *ngIf = "motor.rented==false">
-                    <input type="button" class="btn btn-primary" value ="Rent"  (click)="rentBike(motor.id)">
+                    <input type="button" class="btn btn-primary button" value ="Rent"  (click)="rentBike(motor.id)">
+                    <input type="button" class="btn btn-primary" value ="Send message" (click)="sendMessage(motor.owner.id)">
                 </div>
             </div>
         </li>

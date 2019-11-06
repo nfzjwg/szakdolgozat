@@ -50,19 +50,35 @@ public class MessagesController{
         return ResponseEntity.notFound().build();
     }
     /**
+     * Returns all the messages that are the given users messages.
+     * @param owner The id of the user.  
+     * @return ResponsEntry
+     */
+    @GetMapping("/by-user")
+    
+    public ResponseEntity<List<Messages>> getRentsByUser(@PathParam(value = "user") Integer user) {
+    List<Messages> rents = messageRepository.findAllByUserId(user);
+    return ResponseEntity.ok(rents);
+    }
+
+    /**
      * Adds a message to the user.
      * @param message The message.
      * @param author The id of the user.
      * @return
      */
-    @PostMapping("")
-    public ResponseEntity<Messages> addMessage(
-        @RequestBody Messages message, @PathParam(value = "author") Integer author) {
-        Optional<User> optionalUser = userRepository.findById(author);
-        if (optionalUser.isPresent()) {
-        
-        return ResponseEntity.ok(messageRepository.saveAndFlush(message));
+    @PostMapping("/add")
+    public ResponseEntity<Messages> addCar(
+        @RequestBody Messages message, @PathParam(value = "sender") Integer sender,
+        @PathParam(value = "reciver") Integer reciver) {
+        Optional<User> optionalSender = userRepository.findById(sender);
+        Optional<User> optionalReciver = userRepository.findById(reciver);
+        if (optionalSender.isPresent() && optionalReciver.isPresent()) {
+            
+            Messages newMessage = messageRepository.saveAndFlush(message);
+        return ResponseEntity.ok(newMessage);
         }
+
         return ResponseEntity.notFound().build();
     }
 

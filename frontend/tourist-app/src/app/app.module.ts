@@ -18,6 +18,10 @@ import { UploadmotobikeComponent } from './pages/uploadmotobike/uploadmotobike.c
 import { CarRentComponent } from './pages/car-rent/car-rent.component';
 import { RentalComponent } from './pages/rental/rental.component';
 import { UserRentsComponent } from './pages/user-rents/user-rents.component';
+import { ProfilePanelComponent } from './pages/profile-panel/profile-panel.component';
+import { ProfileDataComponent } from './pages/profile-data/profile-data.component';
+import { ProfileMessagesComponent } from './pages/profile-messages/profile-messages.component';
+import { ProfileFavouritesComponent } from './pages/profile-favourites/profile-favourites.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { UserRentsComponent } from './pages/user-rents/user-rents.component';
     UploadmotobikeComponent,
     CarRentComponent,
     RentalComponent,
-    UserRentsComponent
+    UserRentsComponent,
+    ProfilePanelComponent,
+    ProfileDataComponent,
+    ProfileMessagesComponent,
+    ProfileFavouritesComponent
   ],
   imports: [
     

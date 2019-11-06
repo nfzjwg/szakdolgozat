@@ -26,4 +26,7 @@ export class MotorcycleComponent implements OnInit {
     this.rentService.addRent(0,id);
     this.router.navigate(['rents']);
   }
+  sendMessage(id : number){
+    console.log("Send message here.")
+  }
 }

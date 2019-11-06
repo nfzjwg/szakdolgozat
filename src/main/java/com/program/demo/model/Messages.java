@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+import com.program.demo.model.User;
 
 
 import lombok.AllArgsConstructor;
@@ -27,18 +27,27 @@ public class Messages{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
   
-    @Column(name = "sender", nullable = false)
-    private Integer sender;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id")
+    private User user;
   
-    @Column(name = "reciver", nullable = false)
-    private Integer reciver;
+    
   
     @Column(name = "text", nullable = false)
     private String text;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id")
-    private User user;
+    public int getId(){
+        return this.id;
+    }
+    
+    public String getText(){
+        return this.text;
+    }
+   
+    public void setText(String other){
+        this.text = other;
+    }
+   
    
 
 }

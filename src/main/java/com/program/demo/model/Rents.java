@@ -29,74 +29,68 @@ import lombok.NoArgsConstructor;
 public class Rents {
 
   @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
-    private int id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", updatable = false, nullable = false)
+  private int id;
   
-   /* @Column(name = "renter", nullable = false)
-    private String renter;
+  @Column(name = "start", nullable = false)
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+  private Date start;
+
+  @Column(name = "end")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+  private Date end;
   
-    @Column(name ="rendted_item", nullable = false)
-    private String rentedItem;
-  */
-    @Column(name = "start", nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date start;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "user_id")
+  private User user;
+  
 
-    @Column(name = "end")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date end;
-    
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id")
-    private User user;
-    
+  @ManyToOne(optional = true)
+  @JoinColumn(name = "car_id")
+  private Cars car;
 
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "car_id")
-    private Cars car;
+  @ManyToOne(optional = true)
+  @JoinColumn(name = "motobike_id")
+  private Motobikes motobike;
 
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "motobike_id")
-    private Motobikes motobike;
+  public int  getId(){
+    return this.id;
+  }
+  public Date getStart(){
+    return this.start;
+  }
+  public Date getEnd(){
+    return this.end;
+  }
+  public User getUser(){
+    return this.user;
+  }
+  public Cars getCar(){
+    return this.car;
+  }
+  public Motobikes getMotobike(){
+    return this.motobike;
+  }
+  public void setId(int id){
+    this.id = id;
+  }
+  public void setStart(Date other){
+    this.start = other;
+  }
+  public void setEnd(Date other){
+    this.end = other;
+  }
+  public void setUser(User other){
+    this.user = other;
+  }
+  public void setCar(Cars other) {
+    this.car = other;
+  }
+  public void setMotobike(Motobikes other){
+    this.motobike = other;
+  }
 
-    public int  getId(){
-      return this.id;
-    }
-    public Date getStart(){
-      return this.start;
-    }
-    public Date getEnd(){
-      return this.end;
-    }
-    public User getUser(){
-      return this.user;
-    }
-    public Cars getCar(){
-      return this.car;
-    }
-    public Motobikes getMotobike(){
-      return this.motobike;
-    }
-    public void setId(int id){
-      this.id = id;
-    }
-    public void setStart(Date other){
-      this.start = other;
-    }
-    public void setEnd(Date other){
-      this.end = other;
-    }
-    public void setUser(User other){
-      this.user = other;
-    }
-    public void setCar(Cars other) {
-      this.car = other;
-    }
-    public void setMotobike(Motobikes other){
-      this.motobike = other;
-    }
-
-   
-    }
+  
+}
     

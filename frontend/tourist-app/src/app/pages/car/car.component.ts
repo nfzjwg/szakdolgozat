@@ -27,6 +27,8 @@ export class CarComponent implements OnInit {
   
     this.rentService.addRent(id,0);
     this.router.navigate(['rents']);
-    console.log(this.carService.getCar(id))
+  }
+  sendMessage(id : number){
+    console.log("Send message here.")
   }
 }
