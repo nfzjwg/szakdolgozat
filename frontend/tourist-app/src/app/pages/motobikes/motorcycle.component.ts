@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/User/user.service';
 import { MotobikeService } from 'src/app/services/Motobike/motobike.service';
 import { RentService } from 'src/app/services/Rent/rent.service';
 import { Router } from '@angular/router';
+import { MessageService } from 'src/app/services/Message/message.service';
 
 @Component({
   selector: 'app-motorcycle',
@@ -14,9 +15,11 @@ export class MotorcycleComponent implements OnInit {
   motobikes : Motobike[]
   private userService :UserService
   private rentService : RentService
-  constructor(private router : Router, private motobikeService : MotobikeService, rentService : RentService, userService :UserService) { 
+  private messageService : MessageService
+  constructor(private router : Router, private motobikeService : MotobikeService, rentService : RentService, userService :UserService, messageService : MessageService) { 
     this.userService = userService;
     this.rentService = rentService;
+    this.messageService = messageService;
   }
   async ngOnInit() {
     this.motobikes = await this.motobikeService.getMotobikes()
@@ -27,6 +30,8 @@ export class MotorcycleComponent implements OnInit {
     this.router.navigate(['rents']);
   }
   sendMessage(id : number){
-    console.log("Send message here.")
+    this.messageService.id = id;
+    console.log("Send message here."+this.messageService.id)
+    this.router.navigate(['sendMessage']);
   }
 }

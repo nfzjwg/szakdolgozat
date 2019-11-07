@@ -6,15 +6,23 @@ import { Message } from 'src/app/classes/Message';
   providedIn: 'root'
 })
 export class MessageService {
-
+	id: number;
   constructor(private http : HttpClient, private userService : UserService) { }
 
   async getMessage(id: number) {
 		return this.http.get<Message>(
-			`http://localhost:8080/rents/${id}`,
+			`http://localhost:8080/messages/by-user?sender=${id}`,
 			httpOptions
 		).toPromise().catch((error: HttpErrorResponse) => {
 			return null;
 		});
 	}
+
+	async sendMessage(sender : number, reciver : number, text : string){
+   console.log(text);
+	   return this.http.post(`http://localhost:8080/messages/add?sender=${sender}&reciver=${reciver}`,
+		{
+		  "text" : text
+		}, httpOptions).toPromise();
+	   }
 }

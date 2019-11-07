@@ -56,8 +56,8 @@ public class MessagesController{
      */
     @GetMapping("/by-user")
     
-    public ResponseEntity<List<Messages>> getRentsByUser(@PathParam(value = "user") Integer user) {
-    List<Messages> rents = messageRepository.findAllByUserId(user);
+    public ResponseEntity<List<Messages>> getRentsByUser(@PathParam(value = "sender") Integer sender) {
+    List<Messages> rents = messageRepository.findAllBySender(sender);
     return ResponseEntity.ok(rents);
     }
 
@@ -68,13 +68,15 @@ public class MessagesController{
      * @return
      */
     @PostMapping("/add")
-    public ResponseEntity<Messages> addCar(
-        @RequestBody Messages message, @PathParam(value = "sender") Integer sender,
+    public ResponseEntity<Messages> addMessage(
+        @RequestBody Messages message, 
+        @PathParam(value = "sender") Integer sender,
         @PathParam(value = "reciver") Integer reciver) {
         Optional<User> optionalSender = userRepository.findById(sender);
         Optional<User> optionalReciver = userRepository.findById(reciver);
         if (optionalSender.isPresent() && optionalReciver.isPresent()) {
-            
+            message.setSender(sender);
+            message.setReciver(reciver);
             Messages newMessage = messageRepository.saveAndFlush(message);
         return ResponseEntity.ok(newMessage);
         }

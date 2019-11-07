@@ -22,6 +22,7 @@ import { ProfilePanelComponent } from './pages/profile-panel/profile-panel.compo
 import { ProfileDataComponent } from './pages/profile-data/profile-data.component';
 import { ProfileMessagesComponent } from './pages/profile-messages/profile-messages.component';
 import { ProfileFavouritesComponent } from './pages/profile-favourites/profile-favourites.component';
+import { MessageSenderFormComponent } from './pages/message-sender-form/message-sender-form.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ProfileFavouritesComponent } from './pages/profile-favourites/profile-f
     ProfilePanelComponent,
     ProfileDataComponent,
     ProfileMessagesComponent,
-    ProfileFavouritesComponent
+    ProfileFavouritesComponent,
+    MessageSenderFormComponent
   ],
   imports: [
     

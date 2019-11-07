@@ -5,10 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import com.program.demo.model.User;
 
 
 import lombok.AllArgsConstructor;
@@ -25,16 +22,17 @@ import lombok.NoArgsConstructor;
 public class Messages{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-  
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id")
-    private User user;
-  
+    @Column(name = "id", updatable = false, nullable = false)
+    private int id;
     
-  
     @Column(name = "text", nullable = false)
     private String text;
+
+    @Column(name = "sender", nullable = false)
+    private int sender;
+
+    @Column(name = "reciver", nullable = false)
+    private int reciver;
 
     public int getId(){
         return this.id;
@@ -43,11 +41,22 @@ public class Messages{
     public String getText(){
         return this.text;
     }
+    public int getSender(){
+        return this.sender;
+    }
+    public int getReciver(){
+        return this.reciver;
+    }
    
     public void setText(String other){
         this.text = other;
     }
-   
+    public void setSender(int other){
+        this.sender = other;
+    }
+    public void setReciver(int other){
+        this.reciver = other;
+    }
    
 
 }

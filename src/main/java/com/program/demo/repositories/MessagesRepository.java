@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MessagesRepository extends JpaRepository<Messages, Integer> {
 
-    List<Messages> findAllByUserId(Integer user_id);
+    List<Messages> findAllBySender(Integer sender);
 }

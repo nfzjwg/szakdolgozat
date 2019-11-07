@@ -106,6 +106,13 @@ export class UserService {
   isGuest(){
     return this.user.role == "ROLE_GUEST";
   }
-
-
+  async getUser(id: number) {
+		return this.http.get<User>(
+			`http://localhost:8080/users/${id}`,
+			httpOptions
+		).toPromise().catch((error: HttpErrorResponse) => {
+			return null;
+		});
+	}
+ 
 }
