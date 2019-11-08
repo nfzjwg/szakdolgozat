@@ -11,23 +11,33 @@ import { User } from 'src/app/classes/User';
 })
 export class ProfileMessagesComponent implements OnInit {
   messages : Message[]
+  users : User[]
   reciver : User
+  
   private userService : UserService;
   private messageService : MessageService;
   constructor( userService : UserService,  messageService : MessageService) { 
     this.userService = userService;
     this.messageService = messageService;
+    this.users = [];
   }
     
   async ngOnInit() {
+  
     this.messages = await this.messageService.getMessage(this.userService.user.id);
     console.log(this.messages)
+    for( var m of this.messages){
+      this.reciver  = await this.userService.getUser(m.reciver)
+      this.users.push(this.reciver)
+    }
+    
+    console.log(this.users)
   }
   getSender(){
     return this.userService.user.username
   }
-  async getReciver(id : number){
-    this.reciver = await this.userService.getUser(id)
-    console.log(this.reciver)
+  getReciver(id : number){
+    console.log(this.users[id])
+   return this.users[id]
   }
 }

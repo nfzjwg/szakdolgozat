@@ -57,8 +57,8 @@ public class MessagesController{
     @GetMapping("/by-user")
     
     public ResponseEntity<List<Messages>> getRentsByUser(@PathParam(value = "sender") Integer sender) {
-    List<Messages> rents = messageRepository.findAllBySender(sender);
-    return ResponseEntity.ok(rents);
+    List<Messages> message = messageRepository.findAllBySender(sender);
+    return ResponseEntity.ok(message);
     }
 
     /**
