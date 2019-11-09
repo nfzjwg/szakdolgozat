@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface MessagesRepository extends JpaRepository<Messages, Integer> {
 
     List<Messages> findAllBySender(Integer sender);
+    List<Messages> findAllByReciver(Integer reciver);
 }

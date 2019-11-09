@@ -9,9 +9,18 @@ export class MessageService {
 	id: number;
   constructor(private http : HttpClient, private userService : UserService) { }
 
-  async getMessage(id: number) {
+  async getMessageBySender(id: number) {
 		return this.http.get<Message>(
 			`http://localhost:8080/messages/by-user?sender=${id}`,
+			httpOptions
+		).toPromise().catch((error: HttpErrorResponse) => {
+			return null;
+		});
+	}
+
+	async getMessageByReciver(id: number) {
+		return this.http.get<Message>(
+			`http://localhost:8080/messages/by-reciver?reciver=${id}`,
 			httpOptions
 		).toPromise().catch((error: HttpErrorResponse) => {
 			return null;

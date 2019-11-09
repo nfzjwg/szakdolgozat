@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/User/user.service';
 import { MessageService } from 'src/app/services/Message/message.service';
 import { Message } from 'src/app/classes/Message';
 import { User } from 'src/app/classes/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-messages',
@@ -10,34 +11,44 @@ import { User } from 'src/app/classes/User';
   styleUrls: ['./profile-messages.component.css']
 })
 export class ProfileMessagesComponent implements OnInit {
-  messages : Message[]
-  users : User[]
+  messagesSent : Message[]
+  messagesRecived : Message[]
+  recivers : User[]
+  senders : User[]
   reciver : User
+  sender : User
   
   private userService : UserService;
   private messageService : MessageService;
-  constructor( userService : UserService,  messageService : MessageService) { 
+  constructor(private router : Router, userService : UserService,  messageService : MessageService) { 
     this.userService = userService;
     this.messageService = messageService;
-    this.users = [];
+    this.recivers = [];
+    this.senders = [];
   }
     
   async ngOnInit() {
   
-    this.messages = await this.messageService.getMessage(this.userService.user.id);
-    console.log(this.messages)
-    for( var m of this.messages){
+    this.messagesSent = await this.messageService.getMessageBySender(this.userService.user.id);
+    console.log(this.messagesSent)
+    this.messagesRecived = await this.messageService.getMessageByReciver(this.userService.user.id);
+    for( var m of this.messagesSent){
       this.reciver  = await this.userService.getUser(m.reciver)
-      this.users.push(this.reciver)
+      this.recivers.push(this.reciver)
+    }
+    for( var m of this.messagesRecived){
+      this.sender  = await this.userService.getUser(m.sender)
+      this.senders.push(this.sender)
     }
     
-    console.log(this.users)
+    console.log("recivers " +this.recivers)
+    console.log("senders " +this.senders)
   }
-  getSender(){
-    return this.userService.user.username
+
+  sendMessage(id : number){
+    this.messageService.id = id;
+    console.log("Send message here."+this.messageService.id)
+    this.router.navigate(['sendMessage']);
   }
-  getReciver(id : number){
-    console.log(this.users[id])
-   return this.users[id]
-  }
+  
 }

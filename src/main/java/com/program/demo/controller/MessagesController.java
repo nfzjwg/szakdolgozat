@@ -51,13 +51,25 @@ public class MessagesController{
     }
     /**
      * Returns all the messages that are the given users messages.
-     * @param owner The id of the user.  
+     * @param sender The id of the sender.  
      * @return ResponsEntry
      */
     @GetMapping("/by-user")
     
-    public ResponseEntity<List<Messages>> getRentsByUser(@PathParam(value = "sender") Integer sender) {
+    public ResponseEntity<List<Messages>> getMessagesBySender(@PathParam(value = "sender") Integer sender) {
     List<Messages> message = messageRepository.findAllBySender(sender);
+    return ResponseEntity.ok(message);
+    }
+
+    /**
+     * Returns all the messages where the reciver id is the given id.
+     * @param reciver The id of the sender.  
+     * @return ResponsEntry
+     */
+    @GetMapping("/by-reciver")
+    
+    public ResponseEntity<List<Messages>> getMessagesByReciver(@PathParam(value = "reciver") Integer reciver) {
+    List<Messages> message = messageRepository.findAllByReciver(reciver);
     return ResponseEntity.ok(message);
     }
 
