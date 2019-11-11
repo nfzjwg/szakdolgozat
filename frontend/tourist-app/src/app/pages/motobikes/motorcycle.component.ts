@@ -5,6 +5,7 @@ import { MotobikeService } from 'src/app/services/Motobike/motobike.service';
 import { RentService } from 'src/app/services/Rent/rent.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'src/app/services/Message/message.service';
+import { FavouriteService } from 'src/app/services/Favourite/favourite.service';
 
 @Component({
   selector: 'app-motorcycle',
@@ -16,10 +17,12 @@ export class MotorcycleComponent implements OnInit {
   private userService :UserService
   private rentService : RentService
   private messageService : MessageService
-  constructor(private router : Router, private motobikeService : MotobikeService, rentService : RentService, userService :UserService, messageService : MessageService) { 
+  private favouriteService : FavouriteService
+  constructor(private router : Router, private motobikeService : MotobikeService, rentService : RentService, userService :UserService, messageService : MessageService, favouriteService : FavouriteService) { 
     this.userService = userService;
     this.rentService = rentService;
     this.messageService = messageService;
+    this.favouriteService = favouriteService;
   }
   async ngOnInit() {
     this.motobikes = await this.motobikeService.getMotobikes()
@@ -32,6 +35,10 @@ export class MotorcycleComponent implements OnInit {
     }else{
       this.router.navigate(['rents']);
     }
+  }
+  addBikeToFavourites(id:number){
+    this.favouriteService.addFavourite(0, id);
+   
   }
   sendMessage(id : number){
     this.messageService.id = id;

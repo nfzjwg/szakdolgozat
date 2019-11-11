@@ -10,4 +10,5 @@ export class Rent{
     userID : number;
     carID : number;
     motobikeID : number;
+    payed : boolean
 }

@@ -3,6 +3,9 @@ import { UserService } from 'src/app/services/User/user.service';
 import { RentService } from 'src/app/services/Rent/rent.service';
 import { Rent } from 'src/app/classes/Rent';
 import { Router } from '@angular/router';
+import { MotobikeService } from 'src/app/services/Motobike/motobike.service';
+import { CarService } from 'src/app/services/Car/car.service';
+import { FavouriteService } from 'src/app/services/Favourite/favourite.service';
 
 @Component({
   selector: 'app-user-rents',
@@ -10,7 +13,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-rents.component.css']
 })
 export class UserRentsComponent implements OnInit {
-  constructor(private router : Router,private userService : UserService, private rentService : RentService) {
+  constructor(private router : Router,private userService : UserService, private rentService : RentService,
+    private bikeService : MotobikeService, private carService : CarService, private favouriteService :FavouriteService) {
   }
   rent : Rent 
   rents : Rent[]
@@ -26,7 +30,7 @@ export class UserRentsComponent implements OnInit {
    
     
   }
-  createBill(id : number){
+  createBill(id : number, rentID :number){
     for( var i in this.rents){
       if(id == Number(i)){
         this.rent = this.rents[i]
@@ -39,13 +43,6 @@ export class UserRentsComponent implements OnInit {
         var endDay = Number(this.rent.end.toString().substring(8,10))
         var endHour = Number(this.rent.end.toString().substring(11,13))
         var endMinutes = Number(this.rent.end.toString().substring(14,16))
-        let monthPart = 0
-      /*  if((endMonth- startMonth) != 0){
-          monthPart=  Number(this.months[startMonth-1]) * 1440
-        }
-        var result = endMinutes - startMinutes + (endHour - startHour) * 60 +
-          (endDay - startDay) * 1440 + monthPart
-        console.log("the result is: ", result)*/
         var sum = 0
         for(let i = 0; i < startMonth; i++){
           sum+=Number(this.months[i])
@@ -57,9 +54,12 @@ export class UserRentsComponent implements OnInit {
         } 
         sum1 = sum1 * 1440 + endDay * 1440 + endHour * 60 + endMinutes
         console.log("The total cost: ",(sum1 - sum) * 10, "Ft")
-        
+        this.rentService.setPayed(rentID)
+        window.location.reload();
       }
     }
-   
+  }
+
+  addBikeToTheFavourite(id : number){
   }
 }

@@ -28,7 +28,7 @@ public class MessagesController{
     @Autowired private UserRepository userRepository;
 
     /**
-     * Return all te messages.
+     * Return all messages.
      * @return ResponseEntity
      */
     @GetMapping("")
@@ -63,7 +63,7 @@ public class MessagesController{
 
     /**
      * Returns all the messages where the reciver id is the given id.
-     * @param reciver The id of the sender.  
+     * @param reciver The id of the reciver.  
      * @return ResponsEntry
      */
     @GetMapping("/by-reciver")

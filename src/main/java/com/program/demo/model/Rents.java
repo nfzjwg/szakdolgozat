@@ -1,4 +1,5 @@
 package com.program.demo.model;
+
 import javax.persistence.JoinColumn;
 
 import java.util.Date;
@@ -19,7 +20,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 //import org.springframework.security.core.GrantedAuthority;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,7 +32,7 @@ public class Rents {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", updatable = false, nullable = false)
   private int id;
-  
+
   @Column(name = "start", nullable = false)
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
   private Date start;
@@ -40,11 +40,13 @@ public class Rents {
   @Column(name = "end")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
   private Date end;
-  
+
+  @Column(name = "payed")
+  private Boolean payed;
+
   @ManyToOne(optional = false)
   @JoinColumn(name = "user_id")
   private User user;
-  
 
   @ManyToOne(optional = true)
   @JoinColumn(name = "car_id")
@@ -54,43 +56,60 @@ public class Rents {
   @JoinColumn(name = "motobike_id")
   private Motobikes motobike;
 
-  public int  getId(){
+  public int getId() {
     return this.id;
   }
-  public Date getStart(){
+
+  public Date getStart() {
     return this.start;
   }
-  public Date getEnd(){
+
+  public Date getEnd() {
     return this.end;
   }
-  public User getUser(){
+
+  public Boolean getPayed() {
+    return this.payed;
+  }
+
+  public User getUser() {
     return this.user;
   }
-  public Cars getCar(){
+
+  public Cars getCar() {
     return this.car;
   }
-  public Motobikes getMotobike(){
+
+  public Motobikes getMotobike() {
     return this.motobike;
   }
-  public void setId(int id){
+
+  public void setId(int id) {
     this.id = id;
   }
-  public void setStart(Date other){
+
+  public void setStart(Date other) {
     this.start = other;
   }
-  public void setEnd(Date other){
+
+  public void setEnd(Date other) {
     this.end = other;
   }
-  public void setUser(User other){
+
+  public void setPayed(Boolean other){
+    this.payed = other;
+  }
+
+  public void setUser(User other) {
     this.user = other;
   }
+
   public void setCar(Cars other) {
     this.car = other;
   }
-  public void setMotobike(Motobikes other){
+
+  public void setMotobike(Motobikes other) {
     this.motobike = other;
   }
 
-  
 }
-    

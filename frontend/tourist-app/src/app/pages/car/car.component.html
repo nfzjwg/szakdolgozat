@@ -36,6 +36,7 @@
                 </table>
                 <div class="button-holder" *ngIf = "car.rented==false">
                         <input type="button" class="btn btn-primary button" value ="Rent" (click)="rentCar(car.id)">
+                        <input type="button" class="btn btn-primary button" value ="Add to favourites"  (click)="addCarToFavourites(car.id)">
                         <input type="button" class="btn btn-primary" value ="Send message" (click)="sendMessage(car.owner.id)">
                 </div>
             </div>

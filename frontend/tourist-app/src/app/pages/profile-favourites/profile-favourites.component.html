@@ -1,1 +1,56 @@
-<p>profile-favourites works!!</p>
+<h1>Your favourites:</h1>
+<div class=container style="margin-top:50px; margin-bottom: 50px;">
+    <div class="list-group">
+        <div class="list-group-item card" *ngFor="let item of favourites" > 
+            <div class="card bg-light mb-3" *ngIf="item.favouriteBike ">
+                <table>
+                    <tr>
+                    <th></th>
+                    <th></th>
+                    
+                    </tr>
+                    <tr>
+                    <td> <h2 class="card-title">{{item.favouriteBike.manufacturer}} {{item.favouriteBike.model}}</h2></td>
+                    <td rowspan="3"><img src="../../../assets/images/motobikeImage.png" alt="Motobike image" style="margin-left: 10rem;"></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text">Ccm: {{item.favouriteBike.ccm}}</p></td>
+                    <td></td>
+                    </tr>
+                    <tr>
+                        <td> <p class="card-text">Company: {{item.favouriteBike.owner.username}}</p></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card bg-light mb-3"*ngIf= "item.favouriteCar">
+                <table>
+                    <tr>
+                    <th></th>
+                    <th></th>
+                    
+                    </tr>
+                    <tr>
+                    <td> <h2 class="card-title">{{item.favouriteCar.manufacturer}} {{item.favouriteCar.model}}</h2></td>
+                    <td rowspan="4"><img src="../../../assets/images/carImage.png" alt="Car image" style="margin-left: 10rem;"></td>
+                    </tr>
+                    
+                   
+                    <tr>
+                        <p class="card-text">Ccm: {{item.favouriteCar.ccm}}</p>
+                    <td></td>
+                    </tr>
+                    <tr>
+                            <p class="card-text"*ngIf = "item.favouriteCar.ac==false">Air condtitoner: No</p>
+                            <p class="card-text"*ngIf = "item.favouriteCar.ac==true">Air condtitoner: Yes</p>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td> <p class="card-text">Company: {{item.favouriteCar.owner.username}}</p></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

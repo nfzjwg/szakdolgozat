@@ -56,6 +56,11 @@ public class Motobikes {
     @OneToMany(mappedBy = "motobike", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Rents> rent;
+
+    @OneToMany(mappedBy = "motobike", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Favourites> favourites;
+
     public void setManufacturer( String  other){
         this.manufacturer = other;
     }   

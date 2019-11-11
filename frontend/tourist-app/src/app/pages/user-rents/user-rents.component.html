@@ -10,9 +10,8 @@
                 <div class="button-holder" *ngIf = "rent.motobike.rented && rent.end == null">
                     <input type="button" class="btn btn-primary" value ="Return" (click) ="returnRentedItem(rent.id)" >
                 </div>
-                <div class="button-holder" *ngIf = "rent.end">
-                    <input  type="button" class="btn btn-primary" value ="Pay" (click) ="createBill(i)" >
-
+                <div class="button-holder" *ngIf = "rent.end && rent.payed == false">
+                    <input  type="button" class="btn btn-primary" value ="Pay" (click) ="createBill(i,rent.id)" >
                 </div>
             </div>
             <div class="card bg-light mb-3"*ngIf= "rent.car">
@@ -22,8 +21,11 @@
                     <p>Return date: {{rent.end}}</p>
                     <div class="button-holder" *ngIf = "rent.car.rented && rent.end == null">
                         <input type="button" class="btn btn-primary" value ="Return" (click) ="returnRentedItem(rent.id)" >
-                        <input *ngIf = "rent.end" type="button" class="btn btn-primary" value ="Return" (click) ="createBill(i)" >
                     </div>
+                    <div class="button-holder" *ngIf = "rent.end && rent.payed == false">
+                        <input  type="button" class="btn btn-primary" value ="Pay" (click) ="createBill(i,rent.id)" >
+                    </div>
+
                 </div>
             </div>
     </div>

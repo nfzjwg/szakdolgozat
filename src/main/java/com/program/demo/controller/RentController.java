@@ -141,6 +141,7 @@ public class RentController{
       Rents oldRent = optionalRent.get();
       rent.setId(oldRent.getId());
       rent.setStart(oldRent.getStart());
+      rent.setPayed(oldRent.getPayed());
       rent.setUser(oldRent.getUser());
       rent.setCar(oldRent.getCar());
       rent.setMotobike(oldRent.getMotobike());
@@ -155,4 +156,20 @@ public class RentController{
     return ResponseEntity.notFound().build();
   }
 
+  @PutMapping("/pay/{id}")
+  public ResponseEntity<Rents> payRentedItem(@RequestBody Rents rent, @PathVariable Integer id) {
+    Optional<Rents> optionalRent = rentRepository.findById(id);
+    if (optionalRent.isPresent()) {
+      Rents oldRent = optionalRent.get();
+      rent.setId(oldRent.getId());
+      rent.setStart(oldRent.getStart());
+      rent.setEnd(oldRent.getEnd());
+      rent.setUser(oldRent.getUser());
+      rent.setCar(oldRent.getCar());
+      rent.setMotobike(oldRent.getMotobike());
+      
+      return ResponseEntity.ok(rentRepository.save(rent));
+    }
+    return ResponseEntity.notFound().build();
+  }
 }

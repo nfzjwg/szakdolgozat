@@ -65,6 +65,10 @@ public class User {
     @JsonIgnore
     private List<Rents> rent;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Favourites> favourites;
+
    
     
     
