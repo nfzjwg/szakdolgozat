@@ -26,7 +26,11 @@ export class CarComponent implements OnInit {
   rentCar(id :number){
   
     this.rentService.addRent(id,0);
-    this.router.navigate(['rents']);
+    if( this.userService.user.role == "ROLE_GUEST"){
+      this.router.navigate(['rentsByUser']);  
+    }else{
+      this.router.navigate(['rents']);
+    }
   }
   sendMessage(id : number){
     console.log("Send message here.")

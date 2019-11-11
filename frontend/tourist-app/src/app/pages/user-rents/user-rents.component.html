@@ -1,13 +1,18 @@
 <div class=container style="margin-top:50px; margin-bottom: 50px;">
     <div class="list-group">
-        <div class="list-group-item card" *ngFor="let rent of rents" > 
+        <div class="list-group-item card" *ngFor="let rent of rents; let i = index" > 
             <div class="card bg-light mb-3"*ngIf= "rent.motobike">
                 <h2>{{rent.motobike.manufacturer}} {{rent.motobike.model}}</h2>
                 <h3>Rented by: {{rent.user.username}}</h3>
+                <h3>Rented from: {{rent.motobike.owner.username}}</h3>
                 <p>Rent date: {{rent.start}}</p>
                 <p>Return date: {{rent.end}}</p>
                 <div class="button-holder" *ngIf = "rent.motobike.rented && rent.end == null">
                     <input type="button" class="btn btn-primary" value ="Return" (click) ="returnRentedItem(rent.id)" >
+                </div>
+                <div class="button-holder" *ngIf = "rent.end">
+                    <input  type="button" class="btn btn-primary" value ="Pay" (click) ="createBill(i)" >
+
                 </div>
             </div>
             <div class="card bg-light mb-3"*ngIf= "rent.car">
@@ -17,6 +22,7 @@
                     <p>Return date: {{rent.end}}</p>
                     <div class="button-holder" *ngIf = "rent.car.rented && rent.end == null">
                         <input type="button" class="btn btn-primary" value ="Return" (click) ="returnRentedItem(rent.id)" >
+                        <input *ngIf = "rent.end" type="button" class="btn btn-primary" value ="Return" (click) ="createBill(i)" >
                     </div>
                 </div>
             </div>

@@ -27,7 +27,11 @@ export class MotorcycleComponent implements OnInit {
   }
   rentBike(id :number){
     this.rentService.addRent(0,id);
-    this.router.navigate(['rents']);
+    if( this.userService.user.role == "ROLE_GUEST"){
+      this.router.navigate(['rentsByUser']);  
+    }else{
+      this.router.navigate(['rents']);
+    }
   }
   sendMessage(id : number){
     this.messageService.id = id;
