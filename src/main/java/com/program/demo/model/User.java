@@ -69,6 +69,11 @@ public class User {
     @JsonIgnore
     private List<Favourites> favourites;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Receipt> receipt;
+
+
    
     
     

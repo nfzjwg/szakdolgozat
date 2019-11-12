@@ -23,6 +23,7 @@ import { ProfileDataComponent } from './pages/profile-data/profile-data.componen
 import { ProfileMessagesComponent } from './pages/profile-messages/profile-messages.component';
 import { ProfileFavouritesComponent } from './pages/profile-favourites/profile-favourites.component';
 import { MessageSenderFormComponent } from './pages/message-sender-form/message-sender-form.component';
+import { ReceiptComponent } from './pages/receipt/receipt.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { MessageSenderFormComponent } from './pages/message-sender-form/message-
     ProfileDataComponent,
     ProfileMessagesComponent,
     ProfileFavouritesComponent,
-    MessageSenderFormComponent
+    MessageSenderFormComponent,
+    ReceiptComponent
   ],
   imports: [
     
