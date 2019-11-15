@@ -34,6 +34,11 @@
            Rents
           </a>
         </li>
+        <li class="nav-item" *ngIf ="userService.isLoggedIn() && (userService.isAdmin() || userService.isCompany()) ">
+          <a class="nav-link"  routerLink="/receipts">
+           Receipts
+          </a>
+      </li>
         <li class="nav-item" *ngIf = "userService.isLoggedIn()">
           <a class="nav-link" routerLink="/profile"> Hello {{userService.user.username}}</a>
         </li>

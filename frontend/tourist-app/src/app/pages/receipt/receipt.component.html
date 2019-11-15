@@ -1,0 +1,22 @@
+<div class=container style="margin-top:50px; margin-bottom: 50px;">
+    <div class="list-group">
+        <div class="list-group-item card" *ngFor="let receipt of receipts" > 
+            <div class="card bg-light mb-3"*ngIf= "receipt.motobike">
+                <h2>{{receipt.motobike.manufacturer}} {{receipt.motobike.model}}</h2>
+                <h3>Rented by: {{receipt.user.username}}</h3>
+                <p>Cost: {{receipt.cost}}</p>
+                <div class="button-holder">
+                    <input type="button" class="btn btn-primary" value ="Create receipt" (click) ="createReceipt(receipt.id)" >
+                </div>
+            </div>
+            <div class="card bg-light mb-3"*ngIf= "receipt.car">
+                    <h2>{{receipt.car.manufacturer}} {{receipt.car.model}}</h2>
+                    <h3>Rented by: {{receipt.user.username}}</h3>
+                    <p>Cost: {{receipt.cost}}</p>
+                    <div class="button-holder">
+                        <input type="button" class="btn btn-primary" value ="Create receipt" (click) ="createReceipt(receipt.id)" >
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

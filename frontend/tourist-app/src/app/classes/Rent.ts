@@ -1,3 +1,7 @@
+import { User } from './User';
+import { Car } from './Car';
+import { Motobike } from './Motobike';
+
 export class Rent{
 
     constructor(start : Date, end : Date, ){
@@ -7,8 +11,8 @@ export class Rent{
     id : number;
     start : Date;
     end : Date;
-    userID : number;
-    carID : number;
-    motobikeID : number;
+    user : User;
+    car : Car;
+    motobike : Motobike;
     payed : boolean
 }

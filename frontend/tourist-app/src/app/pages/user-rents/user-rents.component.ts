@@ -6,6 +6,10 @@ import { Router } from '@angular/router';
 import { MotobikeService } from 'src/app/services/Motobike/motobike.service';
 import { CarService } from 'src/app/services/Car/car.service';
 import { FavouriteService } from 'src/app/services/Favourite/favourite.service';
+import * as jsPDF from 'jspdf'
+import { ReceiptService } from 'src/app/services/Receipt/receipt.service';
+import { User } from 'src/app/classes/User';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-user-rents',
@@ -14,13 +18,15 @@ import { FavouriteService } from 'src/app/services/Favourite/favourite.service';
 })
 export class UserRentsComponent implements OnInit {
   constructor(private router : Router,private userService : UserService, private rentService : RentService,
-    private bikeService : MotobikeService, private carService : CarService, private favouriteService :FavouriteService) {
+    private bikeService : MotobikeService, private carService : CarService, private favouriteService :FavouriteService, private receiptService : ReceiptService) {
   }
   rent : Rent 
   rents : Rent[]
+  users : User[]
   months : Number[]
   async ngOnInit() {
     this.rents = await this.rentService.getRentsByUser(this.userService.user.id)
+    this.users = await this.userService.getUsers()
     this.months = [31,30,31,30,31,30,31,31,30,31,30,31]
     console.log(this.rents)
   }
@@ -53,13 +59,27 @@ export class UserRentsComponent implements OnInit {
           sum1+=Number(this.months[i])
         } 
         sum1 = sum1 * 1440 + endDay * 1440 + endHour * 60 + endMinutes
-        console.log("The total cost: ",(sum1 - sum) * 10, "Ft")
-        this.rentService.setPayed(rentID)
-        window.location.reload();
+        var cost = (sum1 - sum) * 10
+        console.log("The total cost: ", cost, "Ft")
+        if(this.rent.car){
+          this.receiptService.addReceipt(this.rent.car.id, 0, this.rent.start, this.rent.end, cost)
+          this.downloadPdf(this.rent.user.username,this.rent.user.id, this.rent.start, this.rent.end, this.rent.car.manufacturer, this.rent.car.model, this.rent.car.owner.username, cost)
+        }else if(this.rent.motobike){
+          this.receiptService.addReceipt(0, this.rent.motobike.id, this.rent.start, this.rent.end, cost)
+          this.downloadPdf(this.rent.user.username,this.rent.user.id, this.rent.start, this.rent.end, this.rent.motobike.manufacturer, this.rent.motobike.model, this.rent.motobike.owner.username, cost)
+        }
       }
     }
   }
 
-  addBikeToTheFavourite(id : number){
-  }
+  downloadPdf(username : string, userID : number, start  : Date, end: Date, manufacturer : string, model : string, company : string, cost : number){ 
+   
+    const date = formatDate(Date.now(), "yyyy-MM-dd", "en-US");
+    const doc = new jsPDF();
+    var text = "The receipt is created for the user '" + username + "', user ID :" +userID+" \nfor renting the followin veichle : " 
+    + manufacturer + " " + model +"\nfrom the company "+ "'" + company + "'" + " with the starting date of " 
+    + start + "\nand with the ending date of " + end + ".\nThe final cost of the rent is: " + cost + ".\n\n" + "Date : "+ date
+    doc.text(text, 20, 20);
+    doc.save('Bill' + username + end.toString().substring(0,10)+'.pdf');
+ }
 }

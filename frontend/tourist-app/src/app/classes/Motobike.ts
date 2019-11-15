@@ -1,3 +1,5 @@
+import { User } from './User';
+
 export class Motobike{
     constructor(){}
 
@@ -6,5 +8,5 @@ export class Motobike{
     model : string;
     ccm : number;
     rented : boolean;
-
+    owner : User
 }
