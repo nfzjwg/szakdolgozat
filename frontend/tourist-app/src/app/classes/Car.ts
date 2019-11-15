@@ -1,5 +1,3 @@
-import { User } from './User';
-
 export class Car{
 
     constructor(manufacturer : string, model : string){
@@ -14,5 +12,5 @@ export class Car{
     ccm : number;
     ac : boolean;
     rented : boolean;
-    owner: User;
+    ownerID: number;
 }
