@@ -29,11 +29,6 @@
              Rents
             </a>
         </li>
-        <li class="nav-item" *ngIf ="userService.isLoggedIn() && (userService.isAdmin() || userService.isCompany()) ">
-          <a class="nav-link"  routerLink="/receipts">
-           Receipts
-          </a>
-      </li>
         <li class="nav-item" *ngIf ="userService.isLoggedIn() && (userService.isGuest())">
           <a class="nav-link"  routerLink="/rentsByUser">
            Rents
