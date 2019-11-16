@@ -1,1 +1,2 @@
 For the PDF downloader install 'npm install jspdf --save' and 'npm install @types/jspdf --save-dev'.
+Fot the Star rating install npm install ng-starrating.

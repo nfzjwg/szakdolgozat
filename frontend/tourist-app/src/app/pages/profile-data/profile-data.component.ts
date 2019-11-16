@@ -7,10 +7,12 @@ import { UserService } from 'src/app/services/User/user.service';
   styleUrls: ['./profile-data.component.css']
 })
 export class ProfileDataComponent implements OnInit {
-
+  rate : string;
   constructor(private userService : UserService) { }
 
   ngOnInit() {
+    var result = this.userService.user.ratingValue/ this.userService.user.ratingNumber
+    this.rate = result.toFixed(1)
   }
 
 }

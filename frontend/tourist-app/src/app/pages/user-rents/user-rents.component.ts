@@ -10,13 +10,29 @@ import * as jsPDF from 'jspdf'
 import { ReceiptService } from 'src/app/services/Receipt/receipt.service';
 import { User } from 'src/app/classes/User';
 import { formatDate } from '@angular/common';
+import { StarRatingComponent } from 'ng-starrating';
 
 @Component({
   selector: 'app-user-rents',
   templateUrl: './user-rents.component.html',
-  styleUrls: ['./user-rents.component.css']
+  styles: [`
+    .star {
+      font-size: 1.5rem;
+      color: #b0c4de;
+    }
+    .filled {
+      color: #1e90ff;
+    }
+    .bad {
+      color: #deb0b0;
+    }
+    .filled.bad {
+      color: #ff1e1e;
+    }
+  `]
 })
 export class UserRentsComponent implements OnInit {
+  currentRate = 6;
   constructor(private router : Router,private userService : UserService, private rentService : RentService,
     private bikeService : MotobikeService, private carService : CarService, private favouriteService :FavouriteService, private receiptService : ReceiptService) {
   }
@@ -82,4 +98,11 @@ export class UserRentsComponent implements OnInit {
     doc.text(text, 20, 20);
     doc.save('Bill' + username + end.toString().substring(0,10)+'.pdf');
  }
+ onRate($event:{newValue:number}, id: number) {
+    var num = $event.newValue
+    console.log( "val" ,num)
+    console.log( "id" ,id)
+    this.userService.edit(num, id)
+    console.log("updated")
+  }
 }

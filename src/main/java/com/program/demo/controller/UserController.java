@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -83,6 +84,31 @@ public class UserController {
   public ResponseEntity<User> login() {
     return ResponseEntity.ok(authenticatedUser.getUser());
   }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<User> addRate(
+    @RequestBody User user,
+    @PathVariable Integer id) {
+    Optional<User> optionalUser = userRepository.findById(id);
+    if (optionalUser.isPresent()) {
+      User oldUser = optionalUser.get();
+      user.setId(oldUser.getId());
+      user.setUsername(oldUser.getUsername());
+      user.setPassword(oldUser.getPassword());
+      user.setEmail(oldUser.getEmail());
+      user.setRole(oldUser.getRole());
+      user.setRatingNumber(oldUser.getRatingNumber()+1);
+      user.setRatingValue(oldUser.getRatingValue()+ user.getRatingValue());
+      user.setCars(oldUser.getCars());
+      user.setMotobikes(oldUser.getMotobikes());
+      user.setRent(oldUser.getRent());
+      user.setFavourites(oldUser.getFavourites());
+      user.setReceipt(oldUser.getReceipt());
+      return ResponseEntity.ok(userRepository.saveAndFlush(user));
+    }
+    return ResponseEntity.notFound().build();
+  }
+
 
 /*
   @DeleteMapping("/{id}")

@@ -113,6 +113,21 @@ export class UserService {
 		).toPromise().catch((error: HttpErrorResponse) => {
 			return null;
 		});
-	}
+  }
+  async edit(
+    plus :number,
+    id : number
+  ) {
+   
+      await this.http
+        .put(`http://localhost:8080/users/${id}`,
+          {
+           "ratingValue" : plus 
+          },
+          httpOptions).toPromise();
+      return Promise.resolve(true);
+    
+  }
+
  
 }

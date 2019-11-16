@@ -24,6 +24,7 @@ import { ProfileMessagesComponent } from './pages/profile-messages/profile-messa
 import { ProfileFavouritesComponent } from './pages/profile-favourites/profile-favourites.component';
 import { MessageSenderFormComponent } from './pages/message-sender-form/message-sender-form.component';
 import { ReceiptComponent } from './pages/receipt/receipt.component';
+import { RatingModule } from 'ng-starrating';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,9 @@ import { ReceiptComponent } from './pages/receipt/receipt.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    RatingModule
+    
      
   ],
   providers: [],
