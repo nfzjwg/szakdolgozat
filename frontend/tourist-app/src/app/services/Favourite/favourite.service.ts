@@ -24,5 +24,12 @@ export class FavouriteService {
 	
 	}
 	
-	  
+	async deleteFavouriteByOwner(id: number) {
+		return this.http.delete<Favourite>(
+		  `http://localhost:8080/favourites/by-owner/${id}`,
+		  httpOptions
+		).toPromise().catch((error: HttpErrorResponse) => {
+		  return null;
+		});
+	  }
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface BikesRepository extends JpaRepository<Motobikes, Integer> {
 
   Optional<Motobikes> findById(Integer bike_id);
+  Optional<Motobikes> findByOwnerId(Integer ownerId);
   List<Motobikes> findAll();
   List<Motobikes> findAllByOwnerId(Integer ownerId);
 }

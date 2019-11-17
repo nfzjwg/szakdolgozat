@@ -16,7 +16,9 @@ import com.program.demo.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -109,4 +111,19 @@ public class FavouritesController{
         return ResponseEntity.notFound().build();
     }
 
+    /**
+     * Deletes the favourite record that belongs to the user.
+     * @param id The id of the user.
+     * @return ResponseEntity
+     */
+    @DeleteMapping("/by-owner/{id}")
+    @Secured({"ROLE_ADMIN"})
+    public ResponseEntity<Favourites> deleteFavouritesByOwner(@PathVariable Integer id) {
+      Optional<Favourites> optionalFavourite = favouritesRepository.findByUserId(id);
+      if (optionalFavourite.isPresent()) {
+        favouritesRepository.delete(optionalFavourite.get());
+        return ResponseEntity.ok().build();
+      }
+      return ResponseEntity.notFound().build();
+    }
 }

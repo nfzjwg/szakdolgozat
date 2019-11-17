@@ -10,9 +10,12 @@ import com.program.demo.model.User;
 import com.program.demo.repositories.MessagesRepository;
 import com.program.demo.repositories.UserRepository;
 
+import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -94,6 +97,21 @@ public class MessagesController{
         }
 
         return ResponseEntity.notFound().build();
+    }
+    /**
+     * Deletes the message with the given sender id.
+     * @param id The id of the sender.
+     * @return ResponseEntity
+     */
+    @DeleteMapping("/by-sender/{id}")
+    @Secured({"ROLE_ADMIN"})
+    public ResponseEntity<Messages> deleteCarByOwner(@PathVariable Integer id) {
+      Optional<Messages> optionalMessage = messageRepository.findBySender(id);
+      if (optionalMessage.isPresent()) {
+        messageRepository.delete(optionalMessage.get());
+        return ResponseEntity.ok().build();
+      }
+      return ResponseEntity.notFound().build();
     }
 
 }

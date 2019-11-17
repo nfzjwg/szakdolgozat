@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +41,6 @@ public class UserController {
    * @return ResponseEntity
    */
   @GetMapping("")
-  @Secured({"ROLE_ADMIN", "ROLE_GUEST"})
   public ResponseEntity<List<User>> getUsers() {
     List<User> users = userRepository.findAll();
     return ResponseEntity.ok(users);
@@ -109,19 +109,24 @@ public class UserController {
     return ResponseEntity.notFound().build();
   }
 
+/**
+ * Deletes a user.
+ * @param id Id of the user.
+ * @return ResponseEntity
+ */
 
-/*
   @DeleteMapping("/{id}")
-  public ResponseEntity deleteComment(@PathVariable Integer id) {
-    Optional<User> optionalComment = userRepository.findById(id);
-    if (optionalComment.isPresent()) {
-      userRepository.delete(optionalComment.get());
+  @Secured({"ROLE_ADMIN"})
+  public ResponseEntity deleteUser(@PathVariable Integer id) {
+    Optional<User> optionalUser = userRepository.findById(id);
+    if (optionalUser.isPresent()) {
+      userRepository.delete(optionalUser.get());
       return ResponseEntity.ok().build();
     }
     
     return ResponseEntity.notFound().build();
   }
-*/
+
 
   
 }

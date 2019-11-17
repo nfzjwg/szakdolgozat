@@ -1,5 +1,6 @@
 package com.program.demo.repositories;
 import java.util.List;
+import java.util.Optional;
 
 import com.program.demo.model.Cars;
 
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CarsRepository extends JpaRepository<Cars, Integer> {
-
+  Optional<Cars> findByOwnerId(Integer ownerId);
   List<Cars> findAllByOwnerId(Integer ownerId);
   List<Cars> findAll();
 }

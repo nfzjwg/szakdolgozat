@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -69,6 +70,7 @@ public class CarsController{
      * @return ResponseEntity
      */
     @DeleteMapping("/{id}")
+    @Secured({"ROLE_ADMIN", "ROLE_COMPANY"})
     public ResponseEntity<Cars> deleteCar(@PathVariable Integer id) {
       Optional<Cars> optionalCar = carRepository.findById(id);
       if (optionalCar.isPresent()) {
@@ -77,6 +79,22 @@ public class CarsController{
       }
       return ResponseEntity.notFound().build();
     }
+/**
+     * Deletes the car with the given owner id.
+     * @param id The id of the owner.
+     * @return ResponseEntity
+     */
+    @DeleteMapping("/by-owner/{id}")
+    @Secured({"ROLE_ADMIN"})
+    public ResponseEntity<Cars> deleteCarByOwner(@PathVariable Integer id) {
+      Optional<Cars> optionalCar = carRepository.findByOwnerId(id);
+      if (optionalCar.isPresent()) {
+        carRepository.delete(optionalCar.get());
+        return ResponseEntity.ok().build();
+      }
+      return ResponseEntity.notFound().build();
+    }
+
     /**
      * Adds a car to the table.
      * @param car The car.
@@ -96,6 +114,24 @@ public class CarsController{
 
         return ResponseEntity.notFound().build();
     }
+    @PutMapping("/{id}")
+    @Secured({"ROLE_AUTHOR"})
+    public ResponseEntity<Cars> putCar(@RequestBody Cars car,
+     @PathVariable Integer id) {
+      Optional<Cars> optionalCar = carRepository.findById(id);
+      if (optionalCar.isPresent()) {
+        Cars oldCar = optionalCar.get();
+        car.setId(oldCar.getId());
+        car.setRented(oldCar.getRented());
+        car.setOwner(oldCar.getOwner());
+        car.setRent(oldCar.getRents());
+        car.setFavourites(oldCar.getFavourites());
+        car.setReceipt(oldCar.getReceipts());
+        return ResponseEntity.ok(carRepository.save(car));
+      }
+      return ResponseEntity.notFound().build();
+    }
+  
 
   
 }

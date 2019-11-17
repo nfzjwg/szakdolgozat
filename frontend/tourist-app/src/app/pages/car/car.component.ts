@@ -32,11 +32,7 @@ export class CarComponent implements OnInit {
   rentCar(id :number){
   
     this.rentService.addRent(id,0);
-    if( this.userService.user.role == "ROLE_GUEST"){
-      this.router.navigate(['rentsByUser']);  
-    }else{
-      this.router.navigate(['rents']);
-    }
+    window.location.reload();
   }
   addCarToFavourites(id : number){
     this.favouriteService.addFavourite(id, 0)
@@ -45,5 +41,11 @@ export class CarComponent implements OnInit {
     this.messageService.id = id;
     console.log("Send message here.")
     this.router.navigate(['sendMessage']);
+  }
+  delete(id : number){
+    this.carService.deleteCar(id)
+  }
+  edit(){
+    this.router.navigate(['eidtCar']);
   }
 }

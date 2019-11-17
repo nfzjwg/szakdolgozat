@@ -128,6 +128,13 @@ export class UserService {
       return Promise.resolve(true);
     
   }
-
+  async deleteUser(id: number) {
+		return this.http.delete<User>(
+		  `http://localhost:8080/users/${id}`,
+		  httpOptions
+		).toPromise().catch((error: HttpErrorResponse) => {
+		  return null;
+		});
+	  }
  
 }

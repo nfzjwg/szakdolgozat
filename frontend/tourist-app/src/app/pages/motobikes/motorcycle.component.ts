@@ -30,11 +30,8 @@ export class MotorcycleComponent implements OnInit {
   }
   rentBike(id :number){
     this.rentService.addRent(0,id);
-    if( this.userService.user.role == "ROLE_GUEST"){
-      this.router.navigate(['rentsByUser']);  
-    }else{
-      this.router.navigate(['rents']);
-    }
+    console.log("adding rent")
+    window.location.reload();
   }
   addBikeToFavourites(id:number){
     this.favouriteService.addFavourite(0, id);
@@ -44,5 +41,8 @@ export class MotorcycleComponent implements OnInit {
     this.messageService.id = id;
     console.log("Send message here."+this.messageService.id)
     this.router.navigate(['sendMessage']);
+  }
+  deleteBike(id : number){
+    this.motobikeService.deleteMotobike(id)
   }
 }

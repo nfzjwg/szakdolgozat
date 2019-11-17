@@ -24,7 +24,7 @@
            Upload motobike
           </a>
         </li>
-        <li class="nav-item" *ngIf ="userService.isLoggedIn() && (userService.isAdmin() || userService.isCompany()) ">
+        <li class="nav-item" *ngIf ="userService.isLoggedIn() && (userService.isAdmin()  || userService.isCompany()) ">
             <a class="nav-link"  routerLink="/rents">
              Rents
             </a>
@@ -39,6 +39,11 @@
            Receipts
           </a>
       </li>
+      <li class="nav-item" *ngIf ="userService.isLoggedIn() && userService.isAdmin() ">
+        <a class="nav-link"  routerLink="/users">
+         Users
+        </a>
+    </li>
         <li class="nav-item" *ngIf = "userService.isLoggedIn()">
           <a class="nav-link" routerLink="/profile"> Hello {{userService.user.username}}</a>
         </li>

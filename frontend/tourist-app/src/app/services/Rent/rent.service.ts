@@ -66,6 +66,15 @@ export class RentService {
       }, httpOptions).toPromise();
       return Promise.resolve(true);
     } 
+
+    async deleteRentByOwner(id: number) {
+      return this.http.delete<Rent>(
+        `http://localhost:8080/rents/by-user/${id}`,
+        httpOptions
+      ).toPromise().catch((error: HttpErrorResponse) => {
+        return null;
+      });
+    }
     
   }
 

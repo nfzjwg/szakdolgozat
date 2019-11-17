@@ -25,6 +25,8 @@ import { ProfileFavouritesComponent } from './pages/profile-favourites/profile-f
 import { MessageSenderFormComponent } from './pages/message-sender-form/message-sender-form.component';
 import { ReceiptComponent } from './pages/receipt/receipt.component';
 import { RatingModule } from 'ng-starrating';
+import { CarEditComponent } from './pages/car-edit/car-edit.component';
+import { UsersComponent } from './pages/users/users.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { RatingModule } from 'ng-starrating';
     ProfileMessagesComponent,
     ProfileFavouritesComponent,
     MessageSenderFormComponent,
-    ReceiptComponent
+    ReceiptComponent,
+    CarEditComponent,
+    UsersComponent
   ],
   imports: [
     

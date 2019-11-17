@@ -1,7 +1,8 @@
 <div class=container style="margin-top:50px; margin-bottom: 50px;">
     <div class="list-group">
-        <div class="list-group-item card" *ngFor="let rent of rents" > 
-            <div class="card bg-light mb-3"*ngIf= "rent.motobike">
+        <div class="list-group-item card" *ngFor="let rent of rents; let i = index" > 
+            <div class="card bg-light mb-3"*ngIf= "rent.motobike && rent.motobike.owner.id == userService.user.id">
+                <h2>{{rent.motobike.owner.id}} {{userService.user.id}}</h2>
                 <h2>{{rent.motobike.manufacturer}} {{rent.motobike.model}}</h2>
                 <h3>Rented by: {{rent.user.username}}</h3>
                 <p>Rent date: {{rent.start}}</p>
@@ -9,8 +10,14 @@
                 <div class="button-holder" *ngIf = "rent.motobike.rented && rent.end == null">
                     <input type="button" class="btn btn-primary" value ="Return" (click) ="returnRentedItem(rent.id)" >
                 </div>
+                <div class="button-holder" *ngIf = "rent.end && rent.payed == false">
+                        <input  type="button" class="btn btn-primary" value ="Pay" (click) ="createBill(i,rent.id)" >
+                        <br>
+                        <star-rating value="5" checkedcolor="red" uncheckedcolor="black" size="24px"    readonly="false" (rate)="onRate($event, rent.user.id)"></star-rating>
+                </div>
             </div>
-            <div class="card bg-light mb-3"*ngIf= "rent.car">
+        
+            <div class="card bg-light mb-3"*ngIf= "rent.car && rent.car.owner.id == userService.user.id">
                     <h2>{{rent.car.manufacturer}} {{rent.car.model}}</h2>
                     <h3>Rented by: {{rent.user.username}}</h3>
                     <p>Rent date: {{rent.start}}</p>
@@ -18,7 +25,12 @@
                     <div class="button-holder" *ngIf = "rent.car.rented && rent.end == null">
                         <input type="button" class="btn btn-primary" value ="Return" (click) ="returnRentedItem(rent.id)" >
                     </div>
-                </div>
+                    <div class="button-holder" *ngIf = "rent.end && rent.payed == false">
+                            <input  type="button" class="btn btn-primary" value ="Pay" (click) ="createBill(i,rent.id)" >
+                            <br>
+                            <star-rating value="5" checkedcolor="red" uncheckedcolor="black" size="24px"    readonly="false" (rate)="onRate($event, rent.user.id)"></star-rating>
+                    </div>
             </div>
+        </div>
     </div>
 </div>

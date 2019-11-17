@@ -15,6 +15,7 @@ import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -82,6 +83,23 @@ public class RentController{
       }
       return ResponseEntity.notFound().build();
     }
+
+    /**
+     * Deletes the rent that belongs to the user.
+     * @param id The id of the user.
+     * @return ResponseEntity
+     */
+    @DeleteMapping("/by-user/{id}")
+    @Secured({"ROLE_ADMIN"})
+    public ResponseEntity<Rents> deleteRentByUser(@PathVariable Integer id) {
+      Optional<Rents> optionalRent = rentRepository.findByUserId(id);
+      if (optionalRent.isPresent()) {
+        rentRepository.delete(optionalRent.get());
+        return ResponseEntity.ok().build();
+      }
+      return ResponseEntity.notFound().build();
+    }
+
     /**
      * Adds a rent to the table.
      * @param rent The new rent.

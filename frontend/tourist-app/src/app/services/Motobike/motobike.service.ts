@@ -53,6 +53,21 @@ export class MotobikeService {
       }, httpOptions).toPromise();
     }
 
-    
+    async deleteMotobike(id: number) {
+      return this.http.delete<Motobike>(
+        `http://localhost:8080/motobikes/${id}`,
+        httpOptions
+      ).toPromise().catch((error: HttpErrorResponse) => {
+        return null;
+      });
+    }
+    async deleteMotobikeByOwner(id: number) {
+      return this.http.delete<Motobike>(
+        `http://localhost:8080/motobikes/by-owner/${id}`,
+        httpOptions
+      ).toPromise().catch((error: HttpErrorResponse) => {
+        return null;
+      });
+    }
 }
 

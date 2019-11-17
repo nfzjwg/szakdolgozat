@@ -14,6 +14,7 @@ import { UserRentsComponent } from './pages/user-rents/user-rents.component';
 import { ProfilePanelComponent } from './pages/profile-panel/profile-panel.component';
 import { MessageSenderFormComponent } from './pages/message-sender-form/message-sender-form.component';
 import { ReceiptComponent } from './pages/receipt/receipt.component';
+import { UsersComponent } from './pages/users/users.component';
 
 
 
@@ -30,7 +31,8 @@ const routes: Routes = [
   { path : "rentsByUser" , component : UserRentsComponent},
   { path : "profile" , component : ProfilePanelComponent},
   { path : "sendMessage" , component : MessageSenderFormComponent},
-  { path : "receipts" , component : ReceiptComponent}
+  { path : "receipts" , component : ReceiptComponent},
+  { path : "users" , component : UsersComponent}
 ];
 
 @NgModule({

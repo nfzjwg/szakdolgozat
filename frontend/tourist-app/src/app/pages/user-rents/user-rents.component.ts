@@ -80,10 +80,13 @@ export class UserRentsComponent implements OnInit {
         if(this.rent.car){
           this.receiptService.addReceipt(this.rent.car.id, 0, this.rent.start, this.rent.end, cost)
           this.downloadPdf(this.rent.user.username,this.rent.user.id, this.rent.start, this.rent.end, this.rent.car.manufacturer, this.rent.car.model, this.rent.car.owner.username, cost)
+          this.rentService.setPayed(this.rent.id)
         }else if(this.rent.motobike){
           this.receiptService.addReceipt(0, this.rent.motobike.id, this.rent.start, this.rent.end, cost)
           this.downloadPdf(this.rent.user.username,this.rent.user.id, this.rent.start, this.rent.end, this.rent.motobike.manufacturer, this.rent.motobike.model, this.rent.motobike.owner.username, cost)
+          this.rentService.setPayed(this.rent.id)
         }
+        this.router.navigate(['home']);
       }
     }
   }
@@ -100,9 +103,6 @@ export class UserRentsComponent implements OnInit {
  }
  onRate($event:{newValue:number}, id: number) {
     var num = $event.newValue
-    console.log( "val" ,num)
-    console.log( "id" ,id)
     this.userService.edit(num, id)
-    console.log("updated")
   }
 }

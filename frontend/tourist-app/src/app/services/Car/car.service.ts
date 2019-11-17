@@ -55,4 +55,44 @@ console.log(manufacturer);
        
       }, httpOptions).toPromise();
     }
+    async deleteCar(id: number) {
+      return this.http.delete<Car>(
+        `http://localhost:8080/cars/${id}`,
+        httpOptions
+      ).toPromise().catch((error: HttpErrorResponse) => {
+        return null;
+      });
+    }
+    async deleteCarByOwner(id: number) {
+      return this.http.delete<Car>(
+        `http://localhost:8080/cars/by-owner/${id}`,
+        httpOptions
+      ).toPromise().catch((error: HttpErrorResponse) => {
+        return null;
+      });
+    }
+async editCar(id : number,manufacturer : string, model : string,
+  doors : number, engine : string, ccm: number, ac : boolean){
+    try {
+      await this.http
+        .put(
+          `http://localhost:8080/cars/${id}`,
+          {
+            "manufacturer" : manufacturer,
+            "model" : model,
+            "doors" : doors,
+            "engine" : engine,
+            "ccm" : ccm,
+            "ac" : ac
+          },
+          httpOptions
+        )
+        .toPromise();
+
+    }catch (e) {
+    console.log("hiba", e);
+    return Promise.resolve(false);
+    }
+  }
+
 }

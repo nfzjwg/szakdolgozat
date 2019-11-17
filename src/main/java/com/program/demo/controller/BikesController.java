@@ -57,10 +57,27 @@ public class BikesController{
      * @return ResponseEntity
      */
     @DeleteMapping("/{id}")
+    @Secured({"ROLE_ADMIN", "ROLE_COMPANY"})
     public ResponseEntity<Motobikes> deleteBike(@PathVariable Integer id) {
-      Optional<Motobikes> optionalComment = bikeRepository.findById(id);
-      if (optionalComment.isPresent()) {
-        bikeRepository.delete(optionalComment.get());
+      Optional<Motobikes> optionalBike = bikeRepository.findById(id);
+      if (optionalBike.isPresent()) {
+        bikeRepository.delete(optionalBike.get());
+        return ResponseEntity.ok().build();
+      }
+      return ResponseEntity.notFound().build();
+    }
+
+    /**
+     * Deletes te motorcycle if it belongs to the given owner.
+     * @param id The id of the owner.
+     * @return ResponseEntity
+     */
+    @DeleteMapping("/by-owner/{id}")
+    @Secured({"ROLE_ADMIN"})
+    public ResponseEntity<Motobikes> deleteBikeByOwner(@PathVariable Integer id) {
+      Optional<Motobikes> optionalBike = bikeRepository.findByOwnerId(id);
+      if (optionalBike.isPresent()) {
+        bikeRepository.delete(optionalBike.get());
         return ResponseEntity.ok().build();
       }
       return ResponseEntity.notFound().build();

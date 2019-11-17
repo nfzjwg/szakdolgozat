@@ -34,4 +34,13 @@ export class MessageService {
 		  "text" : text
 		}, httpOptions).toPromise();
 	   }
+
+	   async deleteMessageBySender(id: number) {
+		return this.http.delete<Message>(
+		  `http://localhost:8080/messages/by-sender/${id}`,
+		  httpOptions
+		).toPromise().catch((error: HttpErrorResponse) => {
+		  return null;
+		});
+	  }
 }
