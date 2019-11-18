@@ -64,8 +64,8 @@ public class RentController{
  */
     @GetMapping("/by-user")
   
-  public ResponseEntity<List<Rents>> getRentsByUser(@PathParam(value = "owner") Integer owner) {
-    List<Rents> rents = rentRepository.findAllByUserId(owner);
+  public ResponseEntity<List<Rents>> getRentsByUser(@PathParam(value = "user") Integer user) {
+    List<Rents> rents = rentRepository.findAllByUserId(user);
     return ResponseEntity.ok(rents);
   }
 
@@ -88,7 +88,7 @@ public class RentController{
      * Deletes the rent that belongs to the user.
      * @param id The id of the user.
      * @return ResponseEntity
-     */
+     
     @DeleteMapping("/by-user/{id}")
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Rents> deleteRentByUser(@PathVariable Integer id) {
@@ -98,7 +98,7 @@ public class RentController{
         return ResponseEntity.ok().build();
       }
       return ResponseEntity.notFound().build();
-    }
+    }*/
 
     /**
      * Adds a rent to the table.
@@ -113,10 +113,12 @@ public class RentController{
         @PathParam(value = "car_id") Integer car_id,
         @PathParam(value = "motobike_id") Integer motobike_id) {
         Optional<User> optionalUser = userRepository.findById(user_id);
+        System.out.println(optionalUser.toString());
         Optional<Cars> optionalCar = null;
         if(car_id != 0){
           Cars helper = carRepository.findById(car_id).get();
           helper.setRented(true);
+          System.out.println(helper.getRented());
           optionalCar= carRepository.findById(car_id);
         }
         Optional<Motobikes> optionalBike = null;
@@ -131,7 +133,8 @@ public class RentController{
           rent.setCar(optionalCar.get());
           
           Rents newRent = rentRepository.saveAndFlush(rent);
-        return ResponseEntity.ok(newRent);
+          System.out.println(newRent);
+        return null;
         }
         else if(optionalUser.isPresent() && motobike_id != 0 &&
         car_id == 0){
@@ -139,6 +142,7 @@ public class RentController{
           rent.setMotobike(optionalBike.get());
           
           Rents newRent = rentRepository.saveAndFlush(rent);
+          System.out.println("saved");
         return ResponseEntity.ok(newRent);
         }
 

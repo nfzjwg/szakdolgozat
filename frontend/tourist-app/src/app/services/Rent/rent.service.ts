@@ -31,7 +31,7 @@ export class RentService {
   
   async getRentsByUser(userID : number){
     return this.http.get<Rent[]>(
-      `http://localhost:8080/rents/by-user?owner=${userID}`,      
+      `http://localhost:8080/rents/by-user?user=${userID}`,      
       httpOptions
     ).toPromise().catch((error:HttpErrorResponse) => {
       return new Array<Rent>()
@@ -41,6 +41,9 @@ export class RentService {
 
   async addRent(carID : number, motobikeID : number){
       const start = formatDate(Date.now(), "yyyy-MM-dd HH:mm:ss", "en-US");
+      console.log(this.userService.user)
+      console.log(carID)
+      console.log(motobikeID)
     return this.http.post(`http://localhost:8080/rents/upload?user_id=${this.userService.user.id}&car_id=${carID}&motobike_id=${motobikeID}`,
       {
         "start" : start,

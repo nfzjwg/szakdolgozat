@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CarsRepository extends JpaRepository<Cars, Integer> {
-  Optional<Cars> findByOwnerId(Integer ownerId);
+  Optional<Cars> findById(Integer car_id);
   List<Cars> findAllByOwnerId(Integer ownerId);
   List<Cars> findAll();
 }

@@ -17,6 +17,7 @@ export const httpOptions = {
 export class UserService {
   token : string = null;
   user : User = null;
+  users : User[]
   private url = "http://localhost:8080/users";
   constructor(
     private http: HttpClient,
@@ -107,12 +108,19 @@ export class UserService {
     return this.user.role == "ROLE_GUEST";
   }
   async getUser(id: number) {
-		return this.http.get<User>(
-			`http://localhost:8080/users/${id}`,
-			httpOptions
-		).toPromise().catch((error: HttpErrorResponse) => {
-			return null;
-		});
+    this.users = await this.getUsers()
+    for(var user of this.users){
+      if(user.id == id){
+        return this.http.get<User>(
+          `http://localhost:8080/users/${id}`,
+          httpOptions
+        ).toPromise().catch((error: HttpErrorResponse) => {
+          console.log("error")
+          return null;
+        });
+      }
+    }
+		
   }
   async edit(
     plus :number,

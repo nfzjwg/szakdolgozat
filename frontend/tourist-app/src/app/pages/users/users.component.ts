@@ -24,13 +24,17 @@ export class UsersComponent implements OnInit {
     this.users = await this.userService.getUsers()
   }
   deleteUser(id: number){
-    //this.carService.deleteCarByOwner(id)
+   /* this.favouriteService.deleteFavouriteByOwner(id)
+    console.log("favourites deleted")
+    this.carService.deleteCarByOwner(id)
+    console.log("car deleted")
     this.bikeService.deleteMotobikeByOwner(id)
-    this.rentService.deleteRentByOwner(id)
-    this.favouriteService.deleteFavouriteByOwner(id)
+    console.log("bikes deleted")
     this.messageService.deleteMessageBySender(id)
+    console.log("message deleted")*/
     this.userService.deleteUser(id)
-    //window.location.reload();
+    console.log("user deleted")
+    window.location.reload();
 
   }
 

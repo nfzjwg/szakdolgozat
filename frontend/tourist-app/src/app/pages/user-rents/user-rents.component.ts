@@ -44,6 +44,8 @@ export class UserRentsComponent implements OnInit {
     this.rents = await this.rentService.getRentsByUser(this.userService.user.id)
     this.users = await this.userService.getUsers()
     this.months = [31,30,31,30,31,30,31,31,30,31,30,31]
+    console.log(this.userService.user.id)
+    console.log(this.users)
     console.log(this.rents)
   }
   returnRentedItem(id : number){

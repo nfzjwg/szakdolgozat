@@ -102,15 +102,7 @@ public class Cars {
     public void setOwner( User other){
         this.owner = other;
     }   
-    public void setRent(List<Rents> other){
-        this.rent = other;
-    }
-    public void setFavourites(List<Favourites> other){
-        this.favourites = other;
-    }
-    public void setReceipt(List<Receipt> other){
-        this.receipt = other;
-    }
+    
     public int getId(){
         return this.id;
       }
@@ -138,14 +130,6 @@ public class Cars {
     public User getOwner(){
         return this.owner;
     }
-    public List<Rents> getRents(){
-        return this.rent;
-    }
-    public List<Favourites> getFavourites(){
-        return this.favourites;
-    }
-    public List<Receipt> getReceipts(){
-        return this.receipt;
-    }
+   
 }
     

@@ -2,9 +2,14 @@
 <div class=container style="margin-top:50px; margin-bottom: 50px;">
     <div class="list-group" >
         <div class="list-group-item card" *ngFor="let message of messagesSent; let i = index"  > 
-            <div class="card bg-light mb-3" *ngIf="recivers[i]">
+            <div class="card bg-light mb-3" *ngIf="recivers[i] !=null">
                 <h2>From: {{this.userService.user.username}}</h2>
                 <h3>To:{{recivers[i].username}} </h3>
+                <p>Message: {{message.text}}</p>
+            </div>
+            <div class="card bg-light mb-3" *ngIf="recivers[i]== null">
+                <h2>From: {{this.userService.user.username}}</h2>
+                <h3>To: User was deleted </h3>
                 <p>Message: {{message.text}}</p>
             </div>
     </div>
@@ -13,12 +18,12 @@
 <div class=container style="margin-top:50px; margin-bottom: 50px;">
     <div class="list-group" >
         <div class="list-group-item card" *ngFor="let message of messagesRecived; let i = index"  > 
-            <div class="card bg-light mb-3" *ngIf="senders[i]">
+            <div class="card bg-light mb-3" *ngIf="senders[i] != null">
                 <h2>From: {{senders[i].username}} </h2>
                 <h3>To: {{this.userService.user.username}} </h3>
                 <p>Message: {{message.text}}</p>
             </div>
-            <div class="button-holder">
+            <div class="button-holder" *ngIf="senders[i] != null">
                 <input type="button" class="btn btn-primary" value ="Answer" (click)="sendMessage(senders[i].id)">
             </div>
     </div>

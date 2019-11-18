@@ -83,7 +83,7 @@ public class CarsController{
      * Deletes the car with the given owner id.
      * @param id The id of the owner.
      * @return ResponseEntity
-     */
+    
     @DeleteMapping("/by-owner/{id}")
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Cars> deleteCarByOwner(@PathVariable Integer id) {
@@ -94,7 +94,7 @@ public class CarsController{
       }
       return ResponseEntity.notFound().build();
     }
-
+ */
     /**
      * Adds a car to the table.
      * @param car The car.
@@ -114,6 +114,7 @@ public class CarsController{
 
         return ResponseEntity.notFound().build();
     }
+    /*
     @PutMapping("/{id}")
     @Secured({"ROLE_AUTHOR"})
     public ResponseEntity<Cars> putCar(@RequestBody Cars car,
@@ -131,6 +132,7 @@ public class CarsController{
       }
       return ResponseEntity.notFound().build();
     }
+    */
   
 
   
