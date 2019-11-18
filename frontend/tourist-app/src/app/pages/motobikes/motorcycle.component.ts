@@ -45,4 +45,8 @@ export class MotorcycleComponent implements OnInit {
   deleteBike(id : number){
     this.motobikeService.deleteMotobike(id)
   }
+  async edit(id : number){
+    this.motobikeService.bike = await this.motobikeService.getMotobike(id);
+    this.router.navigate(['editMotobike']);
+  }
 }

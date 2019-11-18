@@ -27,6 +27,7 @@ import { ReceiptComponent } from './pages/receipt/receipt.component';
 import { RatingModule } from 'ng-starrating';
 import { CarEditComponent } from './pages/car-edit/car-edit.component';
 import { UsersComponent } from './pages/users/users.component';
+import { EditMotobikeComponent } from './pages/edit-motobike/edit-motobike.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { UsersComponent } from './pages/users/users.component';
     MessageSenderFormComponent,
     ReceiptComponent,
     CarEditComponent,
-    UsersComponent
+    UsersComponent,
+    EditMotobikeComponent
   ],
   imports: [
     

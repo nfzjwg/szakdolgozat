@@ -45,7 +45,9 @@ export class CarComponent implements OnInit {
   delete(id : number){
     this.carService.deleteCar(id)
   }
-  edit(){
-    this.router.navigate(['eidtCar']);
+  async edit(id : number){
+    this.carService.id = id;
+    this.carService.car =  await this.carService.getCar(id)
+    this.router.navigate(['editCar']);
   }
 }

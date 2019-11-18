@@ -15,18 +15,11 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+
 /**
  * This class represents the motorcycles.
  */
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
 @Entity
 @Table(name = "motobikes")
 public class Motobikes {
@@ -65,7 +58,9 @@ public class Motobikes {
     @JsonIgnore
     private List<Receipt> receipt;
 
-
+    public void setId(int other){
+        this.id = other;
+    }
     public void setManufacturer( String  other){
         this.manufacturer = other;
     }   
@@ -81,6 +76,15 @@ public class Motobikes {
     public void setOwner( User other){
         this.owner = other;
     }   
+    public void RentList(List<Rents> other){
+        this.rent = other;
+    }
+    public void FavouriteList(List<Favourites> other){
+        this.favourites = other;
+    }
+    public void ReceiptList(List<Receipt> other){
+        this.receipt = other;
+    }
     public String getManufacturer(){
         return this.manufacturer;
     }
@@ -98,6 +102,15 @@ public class Motobikes {
     }
     public int getId(){
         return this.id;
+    }
+    public List<Rents> RentList(){
+        return this.rent;
+    }
+    public List<Favourites> FavouriteList(){
+        return this.favourites;
+    }
+    public List<Receipt> ReceiptList(){
+        return this.receipt;
     }
 }
     

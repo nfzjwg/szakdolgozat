@@ -8,7 +8,8 @@ import { HttpHeaders, HttpClient, HttpResponse, HttpErrorResponse } from "@angul
 })
 export class MotobikeService {
   userService : UserService
-  //private url = "http://localhost:8080/";
+  id : number
+  bike : Motobike
   constructor(
     private http: HttpClient
   ) { }
@@ -42,32 +43,50 @@ export class MotobikeService {
 
 
   async addMotobike(manufacturer : string, model : string,
-    ccm: number, rented  : boolean,  owner : number){
-    console.log(manufacturer);
-    return this.http.post(`http://localhost:8080/motobikes/upload?owner=`+owner,
-      {
-        "manufacturer" : manufacturer,
-        "model" : model,
-        "ccm" : ccm,
-        "rented" : rented
-      }, httpOptions).toPromise();
-    }
+  ccm: number, rented  : boolean,  owner : number){
+  console.log(manufacturer);
+  return this.http.post(`http://localhost:8080/motobikes/upload?owner=`+owner,
+    {
+      "manufacturer" : manufacturer,
+      "model" : model,
+      "ccm" : ccm,
+      "rented" : rented
+    }, httpOptions).toPromise();
+  }
 
-    async deleteMotobike(id: number) {
-      return this.http.delete<Motobike>(
-        `http://localhost:8080/motobikes/${id}`,
-        httpOptions
-      ).toPromise().catch((error: HttpErrorResponse) => {
-        return null;
-      });
+  async deleteMotobike(id: number) {
+    return this.http.delete<Motobike>(
+      `http://localhost:8080/motobikes/${id}`,
+      httpOptions
+    ).toPromise().catch((error: HttpErrorResponse) => {
+      return null;
+    });
+  }
+  async deleteMotobikeByOwner(id: number) {
+    return this.http.delete<Motobike>(
+      `http://localhost:8080/motobikes/by-owner/${id}`,
+      httpOptions
+    ).toPromise().catch((error: HttpErrorResponse) => {
+      return null;
+    });
+  }
+
+  async editBike(id : number,manufacturer : string, model : string,
+  ccm: number){
+    try {
+      await this.http
+        .put(
+          `http://localhost:8080/motobikes/${id}`,
+          {
+            "manufacturer" : manufacturer,
+            "model" : model,
+            "ccm" : ccm,
+          }, httpOptions).toPromise();
+
+    }catch (e) {
+    console.log("hiba", e);
+    return Promise.resolve(false);
     }
-    async deleteMotobikeByOwner(id: number) {
-      return this.http.delete<Motobike>(
-        `http://localhost:8080/motobikes/by-owner/${id}`,
-        httpOptions
-      ).toPromise().catch((error: HttpErrorResponse) => {
-        return null;
-      });
-    }
+  }
 }
 

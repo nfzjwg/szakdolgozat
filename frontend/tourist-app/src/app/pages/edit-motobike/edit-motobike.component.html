@@ -1,0 +1,23 @@
+<div class="back">
+    <section id="editBike" class="container">
+      <h1 class="text-center">Edit bike</h1>
+      <form class="form" [formGroup]="editBikeForm" (ngSubmit)="editBike()">
+        <div class="form-group">
+          <label for="manufacturer">Manufacturer</label>
+          <input type="text" class="form-control" id="manufacturer" autocomplete="off" formControlName="manufacturer" value="{{bikeService.bike.manufacturer}}"/>
+        </div>
+        <div class="form-group">
+          <label for="model">Model</label>
+          <input type="text" class="form-control" id="model" formControlName="model" value="{{bikeService.bike.model}}"/>
+        </div>
+        <div class="form-group">
+          <label for="ccm">Ccm</label>
+          <input type="text" class="form-control" id="ccm" formControlName="ccm" value="{{bikeService.bike.ccm}}"/>
+        </div>
+        <div class="button-holder">
+            <input type="submit" class="btn btn-primary" value ="Edit" >
+        </div>
+      </form>
+    </section>
+</div>
+    

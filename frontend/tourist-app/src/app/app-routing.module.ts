@@ -15,6 +15,8 @@ import { ProfilePanelComponent } from './pages/profile-panel/profile-panel.compo
 import { MessageSenderFormComponent } from './pages/message-sender-form/message-sender-form.component';
 import { ReceiptComponent } from './pages/receipt/receipt.component';
 import { UsersComponent } from './pages/users/users.component';
+import { CarEditComponent } from './pages/car-edit/car-edit.component';
+import { EditMotobikeComponent } from './pages/edit-motobike/edit-motobike.component';
 
 
 
@@ -32,7 +34,11 @@ const routes: Routes = [
   { path : "profile" , component : ProfilePanelComponent},
   { path : "sendMessage" , component : MessageSenderFormComponent},
   { path : "receipts" , component : ReceiptComponent},
-  { path : "users" , component : UsersComponent}
+  { path : "users" , component : UsersComponent},
+  { path : "editCar" , component : CarEditComponent},
+  { path : "editMotobike" , component : EditMotobikeComponent}
+
+  
 ];
 
 @NgModule({

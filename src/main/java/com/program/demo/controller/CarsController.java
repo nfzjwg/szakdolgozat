@@ -83,7 +83,7 @@ public class CarsController{
      * Deletes the car with the given owner id.
      * @param id The id of the owner.
      * @return ResponseEntity
-    
+*/    
     @DeleteMapping("/by-owner/{id}")
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Cars> deleteCarByOwner(@PathVariable Integer id) {
@@ -94,7 +94,7 @@ public class CarsController{
       }
       return ResponseEntity.notFound().build();
     }
- */
+ 
     /**
      * Adds a car to the table.
      * @param car The car.
@@ -114,25 +114,27 @@ public class CarsController{
 
         return ResponseEntity.notFound().build();
     }
-    /*
+    
     @PutMapping("/{id}")
-    @Secured({"ROLE_AUTHOR"})
+    @Secured({"ROLE_COMPANY"})
     public ResponseEntity<Cars> putCar(@RequestBody Cars car,
      @PathVariable Integer id) {
       Optional<Cars> optionalCar = carRepository.findById(id);
+      System.out.println(optionalCar.toString());
       if (optionalCar.isPresent()) {
+        System.out.println(optionalCar.toString());
         Cars oldCar = optionalCar.get();
         car.setId(oldCar.getId());
         car.setRented(oldCar.getRented());
         car.setOwner(oldCar.getOwner());
-        car.setRent(oldCar.getRents());
-        car.setFavourites(oldCar.getFavourites());
-        car.setReceipt(oldCar.getReceipts());
+        car.RentList(oldCar.RentList());
+        car.FavouriteList(oldCar.FavouriteList());
+        car.ReceiptList(oldCar.ReceiptList());
         return ResponseEntity.ok(carRepository.save(car));
       }
       return ResponseEntity.notFound().build();
     }
-    */
+    
   
 
   

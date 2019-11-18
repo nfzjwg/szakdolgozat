@@ -7,10 +7,10 @@ import { Car } from 'src/app/classes/Car';
   providedIn: 'root'
 })
 export class CarService {
-  userService : UserService
-  //private url = "http://localhost:8080/";
+  id : number
+  car : Car
   constructor(
-    private http: HttpClient
+    private http: HttpClient, private userService : UserService
   ) { }
   async getCar(id: number) {
 		return this.http.get<Car>(

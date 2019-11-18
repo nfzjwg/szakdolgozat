@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -96,24 +97,42 @@ public ResponseEntity<List<Motobikes>> getCarsByUser(@PathParam(value = "owner")
 }
 
 
-    /**
-     * Adds a motorcycle to the table.
-     * @param bike This is the motorcycle.
-     * @param owner The id of the owner.
-     * @return ResponseEntity
-     */
-    @PostMapping("/upload")
-    @Secured({"ROLE_ADMIN", "ROLE_COMPANY"})
-    public ResponseEntity<Motobikes> addBike(
-        @RequestBody Motobikes bike, @PathParam(value = "owner") Integer owner) {
-        Optional<User> optionalUser = userRepository.findById(owner);
-        if (optionalUser.isPresent()) {
-        bike.setOwner(optionalUser.get());
-        Motobikes newBike = bikeRepository.saveAndFlush(bike);
-        return ResponseEntity.ok(newBike);
-        }
-        return ResponseEntity.notFound().build();
+/**
+ * Adds a motorcycle to the table.
+ * @param bike This is the motorcycle.
+ * @param owner The id of the owner.
+ * @return ResponseEntity
+ */
+@PostMapping("/upload")
+@Secured({"ROLE_ADMIN", "ROLE_COMPANY"})
+public ResponseEntity<Motobikes> addBike(
+    @RequestBody Motobikes bike, @PathParam(value = "owner") Integer owner) {
+    Optional<User> optionalUser = userRepository.findById(owner);
+    if (optionalUser.isPresent()) {
+    bike.setOwner(optionalUser.get());
+    Motobikes newBike = bikeRepository.saveAndFlush(bike);
+    return ResponseEntity.ok(newBike);
     }
-
+    return ResponseEntity.notFound().build();
+}
+@PutMapping("/{id}")
+@Secured({"ROLE_COMPANY"})
+public ResponseEntity<Motobikes> putCar(@RequestBody Motobikes bike,
+ @PathVariable Integer id) {
+  Optional<Motobikes> optionalBike = bikeRepository.findById(id);
+  System.out.println(optionalBike.toString());
+  if (optionalBike.isPresent()) {
+    System.out.println(optionalBike.toString());
+    Motobikes oldBike = optionalBike.get();
+    bike.setId(oldBike.getId());
+    bike.setRented(oldBike.getRented());
+    bike.setOwner(oldBike.getOwner());
+    bike.RentList(oldBike.RentList());
+    bike.FavouriteList(oldBike.FavouriteList());
+    bike.ReceiptList(oldBike.ReceiptList());
+    return ResponseEntity.ok(bikeRepository.save(bike));
+  }
+  return ResponseEntity.notFound().build();
+}
   
 }
