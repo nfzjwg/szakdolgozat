@@ -115,6 +115,12 @@ public ResponseEntity<Motobikes> addBike(
     }
     return ResponseEntity.notFound().build();
 }
+/**
+ * Updates a bike in the bike table.
+ * @param bike The bike with the new data.
+ * @param id  The id of the bike that will be updated.
+ * @return ResponseEntity
+ */
 @PutMapping("/{id}")
 @Secured({"ROLE_COMPANY"})
 public ResponseEntity<Motobikes> putCar(@RequestBody Motobikes bike,

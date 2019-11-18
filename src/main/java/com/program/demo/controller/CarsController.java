@@ -114,7 +114,12 @@ public class CarsController{
 
         return ResponseEntity.notFound().build();
     }
-    
+    /**
+     * Updates a car in the car table.  
+     * @param car The car with the new data.
+     * @param id  The id of the car which will be updated.
+     * @return
+     */
     @PutMapping("/{id}")
     @Secured({"ROLE_COMPANY"})
     public ResponseEntity<Cars> putCar(@RequestBody Cars car,
