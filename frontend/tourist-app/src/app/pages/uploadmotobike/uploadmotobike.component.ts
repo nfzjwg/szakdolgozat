@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MotobikeService } from 'src/app/services/Motobike/motobike.service';
 import { UserService } from 'src/app/services/User/user.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-uploadmotobike',
   templateUrl: './uploadmotobike.component.html',
@@ -11,7 +12,8 @@ import { UserService } from 'src/app/services/User/user.service';
 export class UploadmotobikeComponent implements OnInit {
   uploadMotobikeForm : FormGroup;
  
-  constructor(private fb : FormBuilder, private router : Router,private motobikeService : MotobikeService, private userService: UserService) { 
+  constructor(private fb : FormBuilder, private router : Router,private motobikeService : MotobikeService, private userService: UserService,
+    private toastrService : ToastrService) { 
     this.uploadMotobikeForm = this.fb.group({
       manufacturer : ["", Validators.required],
       model : ["", Validators.required],
@@ -31,9 +33,11 @@ export class UploadmotobikeComponent implements OnInit {
       this.uploadMotobikeForm.value.model, 
       Number(this.uploadMotobikeForm.value.ccm),
      false, this.userService.user.id).then((response) =>{
-        if(response){
-          console.log("uploaded");
-        }
+      if(response){
+        this.toastrService.success("Success!", "Upload Motobike")
+      }else{
+        this.toastrService.error("Error!","Upload Motobike")
+      }
       })
       this.router.navigate(['motobikes']);
   }

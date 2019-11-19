@@ -6,6 +6,7 @@ import { RentService } from 'src/app/services/Rent/rent.service';
 import { Router } from '@angular/router';
 import { FavouriteService } from 'src/app/services/Favourite/favourite.service';
 import { MessageService } from 'src/app/services/Message/message.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-car',
@@ -19,7 +20,7 @@ export class CarComponent implements OnInit {
   private rentService : RentService
   private messageService : MessageService
   private favouriteService : FavouriteService
-  constructor(private router : Router, private carService : CarService, rentService : RentService, userService :UserService, messageService : MessageService, favouriteService : FavouriteService) { 
+  constructor(private router : Router, private carService : CarService, rentService : RentService, userService :UserService, messageService : MessageService, favouriteService : FavouriteService, private toastrService : ToastrService) { 
     this.userService = userService;
     this.rentService = rentService;
     this.messageService = messageService;
@@ -35,7 +36,13 @@ export class CarComponent implements OnInit {
     window.location.reload();
   }
   addCarToFavourites(id : number){
-    this.favouriteService.addFavourite(id, 0)
+    this.favouriteService.addFavourite(id, 0).then((response)=>{
+      if(response){
+        this.toastrService.success("Success!", "Adding to favourites")
+      }else{
+        this.toastrService.error("Error!","Adding to favourites")
+      }
+    })
   }
   sendMessage(id : number){
     this.messageService.id = id;

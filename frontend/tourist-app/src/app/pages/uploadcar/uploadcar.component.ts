@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CarService } from 'src/app/services/Car/car.service';
 import { UserService } from 'src/app/services/User/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-uploadcar',
@@ -12,7 +13,8 @@ import { UserService } from 'src/app/services/User/user.service';
 export class UploadcarComponent implements OnInit {
   uploadCarForm : FormGroup;
   air : boolean;
-  constructor(private fb : FormBuilder, private router : Router,private carService : CarService, private userService: UserService) { 
+  constructor(private fb : FormBuilder, private router : Router,private carService : CarService, private userService: UserService,
+    private toastrService : ToastrService) { 
     this.uploadCarForm = this.fb.group({
       manufacturer : ["", Validators.required],
       model : ["", Validators.required],
@@ -40,7 +42,9 @@ export class UploadcarComponent implements OnInit {
       this.uploadCarForm.value.engine, Number(this.uploadCarForm.value.ccm),
       this.air, false, this.userService.user.id).then((response) =>{
         if(response){
-          console.log("uploaded");
+          this.toastrService.success("Success!", "Upload Car")
+        }else{
+          this.toastrService.error("Error!","Upload Car")
         }
       })
       this.router.navigate(['cars']);

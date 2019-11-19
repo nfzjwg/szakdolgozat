@@ -10,7 +10,6 @@ import com.program.demo.model.User;
 import com.program.demo.repositories.MessagesRepository;
 import com.program.demo.repositories.UserRepository;
 
-import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;

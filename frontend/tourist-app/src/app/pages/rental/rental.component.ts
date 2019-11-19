@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 import * as jsPDF from 'jspdf'
 import { ReceiptService } from 'src/app/services/Receipt/receipt.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-rental',
@@ -18,7 +19,8 @@ export class RentalComponent implements OnInit {
   months : Number[]
   private userService : UserService
   private rentService : RentService
-  constructor( private router : Router ,rentService : RentService,  userService : UserService, private receiptService : ReceiptService) {
+  constructor( private router : Router ,rentService : RentService,  userService : UserService, 
+    private receiptService : ReceiptService,private toastrService : ToastrService) {
     this.rentService = rentService;
     this.userService = userService;
    }
@@ -58,11 +60,11 @@ export class RentalComponent implements OnInit {
         var cost = (sum1 - sum) * 10
         console.log("The total cost: ", cost, "Ft")
         if(this.rent.car){
-          this.receiptService.addReceipt(this.rent.car.id, 0, this.rent.start, this.rent.end, cost)
+          this.receiptService.addReceipt(this.rent.car.owner.id,this.rent.car.id, 0, this.rent.start, this.rent.end, cost)
           this.downloadPdf(this.rent.user.username,this.rent.user.id, this.rent.start, this.rent.end, this.rent.car.manufacturer, this.rent.car.model, this.rent.car.owner.username, cost)
           this.rentService.setPayed(this.rent.id)
         }else if(this.rent.motobike){
-          this.receiptService.addReceipt(0, this.rent.motobike.id, this.rent.start, this.rent.end, cost)
+          this.receiptService.addReceipt(this.rent.motobike.owner.id,0, this.rent.motobike.id, this.rent.start, this.rent.end, cost)
           this.downloadPdf(this.rent.user.username,this.rent.user.id, this.rent.start, this.rent.end, this.rent.motobike.manufacturer, this.rent.motobike.model, this.rent.motobike.owner.username, cost)
           this.rentService.setPayed(this.rent.id)
         }
@@ -86,7 +88,13 @@ export class RentalComponent implements OnInit {
     var num = $event.newValue
     console.log( "val" ,num)
     console.log( "id" ,id)
-    this.userService.edit(num, id)
+    this.userService.edit(num, id).then((response) =>{
+      if(response){
+        this.toastrService.success("Success!", "Rating")
+      }else{
+        this.toastrService.error("Error!","Rating")
+      }
+    })
     console.log("updated")
   }
 }

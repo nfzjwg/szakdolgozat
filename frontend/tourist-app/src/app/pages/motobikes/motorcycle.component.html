@@ -22,8 +22,8 @@
                     </tr>
                 </table>
                 <div class="button-holder">
-                    <input type="button" class="btn btn-primary button" value ="Rent"  (click)="rentBike(motor.id)">
-                    <input type="button" class="btn btn-primary button" value ="Add to favourites"  (click)="addBikeToFavourites(motor.id)">
+                    <input *ngIf="userService.isAdmin() == false"  type="button" class="btn btn-primary button" value ="Rent"  (click)="rentBike(motor.id)">
+                    <input *ngIf="userService.isAdmin() == false" type="button" class="btn btn-primary button" value ="Add to favourites"  (click)="addBikeToFavourites(motor.id)">
                     <input type="button" class="btn btn-primary button" value ="Send message"(click)="sendMessage(motor.owner.id)">
                     <input *ngIf="motor.owner.id == userService.user.id && userService.isAdmin() == false" type="button" class="btn btn-primary button" value ="Edit"(click)="edit(motor.id)">
                     <input *ngIf="motor.owner.id == userService.user.id && userService.isAdmin() == false" type="button" class="btn btn-primary button" value ="Delete" (click)="deleteBike(motor.id)">

@@ -36,8 +36,8 @@ export class ReceiptService {
 	}
 
 
-  async addReceipt(carID : number, motobikeID : number, start : Date, end : Date, cost : number){
-    return this.http.post(`http://localhost:8080/receipts/upload?user_id=${this.userService.user.id}&car_id=${carID}&motobike_id=${motobikeID}`,
+  async addReceipt(userID: number,carID : number, motobikeID : number, start : Date, end : Date, cost : number){
+    return this.http.post(`http://localhost:8080/receipts/upload?user_id=${userID}&car_id=${carID}&motobike_id=${motobikeID}`,
       {
         "start" : start,
         "end" : end,

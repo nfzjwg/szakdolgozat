@@ -28,6 +28,8 @@ import { RatingModule } from 'ng-starrating';
 import { CarEditComponent } from './pages/car-edit/car-edit.component';
 import { UsersComponent } from './pages/users/users.component';
 import { EditMotobikeComponent } from './pages/edit-motobike/edit-motobike.component';
+import { ToastrModule } from 'ngx-toastr'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { EditMotobikeComponent } from './pages/edit-motobike/edit-motobike.compo
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
-    RatingModule
+    RatingModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
     
      
   ],
