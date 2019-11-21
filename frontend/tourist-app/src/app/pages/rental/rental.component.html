@@ -2,7 +2,6 @@
     <div class="list-group">
         <div class="list-group-item card" *ngFor="let rent of rents; let i = index" > 
             <div class="card bg-light mb-3"*ngIf= "rent.motobike && (rent.motobike.owner.id == userService.user.id || userService.isAdmin())">
-                <h2>{{rent.motobike.owner.id}} {{userService.user.id}}</h2>
                 <h2>{{rent.motobike.manufacturer}} {{rent.motobike.model}}</h2>
                 <h3>Rented by: {{rent.user.username}}</h3>
                 <p>Rent date: {{rent.start}}</p>

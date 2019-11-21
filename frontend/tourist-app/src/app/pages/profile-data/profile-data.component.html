@@ -3,8 +3,10 @@
       <img class="rounded-circle rounded mx-auto d-block" src="../../../assets/images/defaultPicture.png"  alt="profile pic" height="150" width="150" >
       <h5 class="text-center">Username: {{ userService.user.username }}</h5>
       <h5 class="text-center">E-mail:  {{ userService.user.email }}</h5>
-      <h5 class="text-center" >Role:  {{ userService.user.role }}</h5>
-      <h5 class="text-center" >Rate:  {{ rate }}</h5>
+      <h5 class="text-center" *ngIf="userService.isGuest()">Role:  Guest</h5>
+      <h5 class="text-center" *ngIf="userService.isAdmin()">Role:  Admin</h5>
+      <h5 class="text-center" *ngIf="userService.isCompany()">Role:  Company</h5>
+      <h5 class="text-center" *ngIf="rate > 0">Rate:  {{ rate }}</h5>
     </div>
   </div>
   
