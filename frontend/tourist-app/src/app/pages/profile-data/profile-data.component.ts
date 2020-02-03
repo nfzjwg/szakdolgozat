@@ -12,7 +12,6 @@ export class ProfileDataComponent implements OnInit {
   ngOnInit() {
     var result = this.userService.user.ratingValue/ this.userService.user.ratingNumber
     this.rate = result.toFixed(1)
-    console.log(this.rate)
   }
 
 }

@@ -27,7 +27,6 @@ export class ProfileFavouritesComponent implements OnInit {
 
   async ngOnInit() {
     this.favourites = await this.favouriteService.getFavouritesByUser(this.userService.user.id);
-    console.log(this.favourites)
    
   }
 

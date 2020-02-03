@@ -30,7 +30,6 @@ export class ProfileMessagesComponent implements OnInit {
   async ngOnInit() {
   
     this.messagesSent = await this.messageService.getMessageBySender(this.userService.user.id);
-    console.log(this.messagesSent)
     this.messagesRecived = await this.messageService.getMessageByReciver(this.userService.user.id);
     for( var m of this.messagesSent){
       this.reciver  = await this.userService.getUser(m.reciver)
@@ -41,13 +40,10 @@ export class ProfileMessagesComponent implements OnInit {
       this.senders.push(this.sender)
     }
     
-    console.log("recivers " +this.recivers)
-    console.log("senders " +this.senders)
   }
 
   sendMessage(id : number){
     this.messageService.id = id;
-    console.log("Send message here."+this.messageService.id)
     this.router.navigate(['sendMessage']);
   }
   

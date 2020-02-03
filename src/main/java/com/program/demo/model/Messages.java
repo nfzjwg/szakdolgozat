@@ -47,7 +47,9 @@ public class Messages{
     public int getReciver(){
         return this.reciver;
     }
-   
+   public void setId(int other){
+       this.id = other;
+   }
     public void setText(String other){
         this.text = other;
     }

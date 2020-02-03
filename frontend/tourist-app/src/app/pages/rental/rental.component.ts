@@ -28,7 +28,6 @@ export class RentalComponent implements OnInit {
   async ngOnInit() {
     this.rents = await this.rentService.getRents();
     this.months = [31,30,31,30,31,30,31,31,30,31,30,31]
-    console.log(this.rents)
   }
   returnRentedItem(id : number){
     this.rentService.returnRentedItem(id)
@@ -58,7 +57,6 @@ export class RentalComponent implements OnInit {
         } 
         sum1 = sum1 * 1440 + endDay * 1440 + endHour * 60 + endMinutes
         var cost = (sum1 - sum) * 10
-        console.log("The total cost: ", cost, "Ft")
         if(this.rent.car){
           this.receiptService.addReceipt(this.rent.car.owner.id,this.rent.car.id, 0, this.rent.start, this.rent.end, cost)
           this.downloadPdf(this.rent.user.username,this.rent.user.id, this.rent.start, this.rent.end, this.rent.car.manufacturer, this.rent.car.model, this.rent.car.owner.username, cost)
@@ -86,8 +84,6 @@ export class RentalComponent implements OnInit {
  }
  onRate($event:{newValue:number}, id: number) {
     var num = $event.newValue
-    console.log( "val" ,num)
-    console.log( "id" ,id)
     this.userService.edit(num, id).then((response) =>{
       if(response){
         this.toastrService.success("Success!", "Rating")
@@ -95,7 +91,6 @@ export class RentalComponent implements OnInit {
         this.toastrService.error("Error!","Rating")
       }
     })
-    console.log("updated")
   }
 }
 

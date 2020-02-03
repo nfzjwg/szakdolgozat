@@ -23,7 +23,6 @@ export class ReceiptComponent implements OnInit {
 
   async ngOnInit() {
     this.receipts = await this.receiptService.getReceipts()
-    console.log(this.receipts)
   }
   createReceipt(id : number){
     for( var r of this.receipts){

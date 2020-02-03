@@ -28,8 +28,6 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.loginForm.value.username,
         this.loginForm.value.password).then(response =>{
           if(response){
-            console.log(this.loginForm.value.username)
-            console.log(this.loginForm.value.password)
           }
           this.router.navigate(['/home'])
         })

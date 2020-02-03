@@ -25,7 +25,6 @@ export class MessageSenderFormComponent implements OnInit {
       console.log("hiba");
       return;
     }
-    console.log(this.messageService.id)
     this.messageService.sendMessage(this.userService.user.id,this.messageService.id,
       this.messageForm.value.text
       ).then((response) =>{

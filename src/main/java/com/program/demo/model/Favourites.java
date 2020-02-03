@@ -53,7 +53,9 @@ public class Favourites{
     public Cars getFavouriteCar(){
         return this.car;
     }
-
+    public void setId(int other){
+        this.id = other;
+    }
     public void setUser(User other){
         this.user = other;
     }

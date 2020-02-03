@@ -8,7 +8,6 @@ import { CarComponent } from './pages/car/car.component';
 import { UploadcarComponent } from './pages/uploadcar/uploadcar.component';
 import { MotorcycleComponent } from './pages/motobikes/motorcycle.component';
 import { UploadmotobikeComponent } from './pages/uploadmotobike/uploadmotobike.component';
-import { CarRentComponent } from './pages/car-rent/car-rent.component';
 import { RentalComponent } from './pages/rental/rental.component';
 import { UserRentsComponent } from './pages/user-rents/user-rents.component';
 import { ProfilePanelComponent } from './pages/profile-panel/profile-panel.component';
@@ -26,7 +25,6 @@ const routes: Routes = [
   { path : "users/login", component : LoginComponent},
   { path : "cars" , component : CarComponent},
   { path : "cars/upload" , component : UploadcarComponent},
-  { path : "cars/rent" , component : CarRentComponent},
   { path : "motobikes" , component : MotorcycleComponent},
   { path : "motobikes/upload" , component : UploadmotobikeComponent},
   { path : "rents" , component : RentalComponent},
@@ -36,7 +34,8 @@ const routes: Routes = [
   { path : "receipts" , component : ReceiptComponent},
   { path : "users" , component : UsersComponent},
   { path : "editCar" , component : CarEditComponent},
-  { path : "editMotobike" , component : EditMotobikeComponent}
+  { path : "editMotobike" , component : EditMotobikeComponent},
+  { path : "", component : HomePageComponent}
 
   
 ];

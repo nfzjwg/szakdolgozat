@@ -28,11 +28,9 @@ export class MotorcycleComponent implements OnInit {
   }
   async ngOnInit() {
     this.motobikes = await this.motobikeService.getMotobikes()
-    console.log(this.motobikes)
   }
   rentBike(id :number){
     this.rentService.addRent(0,id);
-    console.log("adding rent")
     window.location.reload();
   }
   addBikeToFavourites(id:number){
@@ -48,11 +46,11 @@ export class MotorcycleComponent implements OnInit {
   }
   sendMessage(id : number){
     this.messageService.id = id;
-    console.log("Send message here."+this.messageService.id)
     this.router.navigate(['sendMessage']);
   }
   deleteBike(id : number){
     this.motobikeService.deleteMotobike(id)
+    window.location.reload();
   }
   async edit(id : number){
     this.motobikeService.bike = await this.motobikeService.getMotobike(id);

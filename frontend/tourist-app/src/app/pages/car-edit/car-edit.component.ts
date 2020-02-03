@@ -31,9 +31,7 @@ export class CarEditComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    console.log(this.carService.car)
-  }
+  ngOnInit() {}
   editCar(){
     if (this.editCarForm.invalid){
       console.log("hiba")

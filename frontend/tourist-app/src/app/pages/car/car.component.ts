@@ -28,7 +28,6 @@ export class CarComponent implements OnInit {
   }
   async ngOnInit() {
     this.cars = await this.carService.getCars()
-    console.log(this.cars)
   }
   rentCar(id :number){
   
@@ -46,11 +45,11 @@ export class CarComponent implements OnInit {
   }
   sendMessage(id : number){
     this.messageService.id = id;
-    console.log("Send message here.")
     this.router.navigate(['sendMessage']);
   }
   delete(id : number){
     this.carService.deleteCar(id)
+    window.location.reload();
   }
   async edit(id : number){
     this.carService.id = id;

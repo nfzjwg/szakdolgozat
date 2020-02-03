@@ -25,7 +25,6 @@ export class UserService {
   ){}
 
   async register(username : string, password : string, email : string, role: string){
-    console.log(username, password,role,email);
     
     try{
       await this.http.post(`${this.url}/register`,
@@ -53,12 +52,9 @@ export class UserService {
       const user = await this.http
         .post<User>(`${this.url}/login`, {}, httpOptions)
         .toPromise();
-        console.log("passed");
         this.user = user;
-        console.log(this.isLoggedIn())
       this.localStorage.setUserData(user);
       this.localStorage.setToken(token);
-      console.log("user set")
       return Promise.resolve(true);
     } catch (e) {
       console.log("hiba", e);
@@ -70,7 +66,6 @@ export class UserService {
     this.user= null;
     this.localStorage.removeToken();
     this.localStorage.removeUserData();
-    console.log("log out", this.isLoggedIn())
   }
   isLoggedIn(){
     return this.user != null;

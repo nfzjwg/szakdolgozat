@@ -168,4 +168,8 @@ public class User {
     public void setRole(Role other){
       this.role = other;
     }
+    @Override
+    public String toString() { 
+        return String.format(id + " " + username+ " " + password + " " + ratingNumber+ "  " + ratingValue); 
+    } 
   }

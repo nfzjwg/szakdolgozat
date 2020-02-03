@@ -28,7 +28,6 @@ export class MessageService {
 	}
 
 	async sendMessage(sender : number, reciver : number, text : string){
-   console.log(text);
 	   return this.http.post(`http://localhost:8080/messages/add?sender=${sender}&reciver=${reciver}`,
 		{
 		  "text" : text

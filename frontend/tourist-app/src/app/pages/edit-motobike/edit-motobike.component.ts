@@ -24,9 +24,7 @@ export class EditMotobikeComponent implements OnInit {
       ccm : [""],
     });
   }
-  ngOnInit() {
-    console.log(this.bikeService.bike)
-  }
+  ngOnInit() {}
 
   editBike(){
     if (this.editBikeForm.invalid){

@@ -44,7 +44,6 @@ export class MotobikeService {
 
   async addMotobike(manufacturer : string, model : string,
   ccm: number, rented  : boolean,  owner : number){
-  console.log(manufacturer);
   return this.http.post(`http://localhost:8080/motobikes/upload?owner=`+owner,
     {
       "manufacturer" : manufacturer,

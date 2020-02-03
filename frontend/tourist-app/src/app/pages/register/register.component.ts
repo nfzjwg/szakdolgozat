@@ -25,16 +25,12 @@ export class RegisterComponent implements OnInit {
   register() {
     if (this.registerForm.invalid) {
       console.log("hiba");
-      console.log(this.registerForm.value.username);
       return;
   	}
-	console.log("register");
   this.userService.register(this.registerForm.value.username,this.registerForm.value.password,
       this.registerForm.value.email,this.registerForm.value.role).then((response) =>{
         if(response){
           
-          console.log(this.registerForm.value.username);
-          console.log(this.registerForm.value.email);
           this.router.navigate(['users/login']);
         }
 	});

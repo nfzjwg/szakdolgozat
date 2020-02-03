@@ -2,7 +2,7 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/ngx-toastr/toastr.css';
 body {
-    background-color: #519adf;
-    background-size: cover;
-    background-image: url("assets/images/background.jpg");
+    background-color: #5ccadd;
+   
+    
    }
